@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\User\Auth\LoginController;
-use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +17,12 @@ use App\Http\Controllers\User\HomeController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('admin.login');
+
+    Route::middleware('auth:admin')->group(function (){
+        Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    });
 });
