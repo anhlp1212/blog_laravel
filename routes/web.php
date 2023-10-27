@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,7 @@ use App\Http\Controllers\Admin\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostsController::class, 'index'])->name('index');
 
 Route::prefix('admin')->group(function () {
     Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('admin.login');
