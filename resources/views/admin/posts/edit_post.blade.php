@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-        Posts Management
+        Edit Post
     </title>
     <!-- Fonts and icons -->
     <link rel="stylesheet" type="text/css"
@@ -19,6 +19,25 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('dashboard/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+    <!-- TinyMCE CDN -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea#editor',
+        });
+    </script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -36,7 +55,7 @@
                                 Management</a></li>
                         <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Posts</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Posts</h6>
+                    <h6 class="font-weight-bolder mb-0">Edit Post</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -62,7 +81,7 @@
                                     <a class="dropdown-item border-radius-md" href="javascript:;">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
-                                                <img src="{{ asset('dashboard/img/team-2.jpg') }} "
+                                                <img src="{{ asset('dashboard/img/team-2.jpg') }}"
                                                     class="avatar avatar-sm  me-3 ">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -81,7 +100,7 @@
                                     <a class="dropdown-item border-radius-md" href="javascript:;">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
-                                                <img src="{{ asset('dashboard/img/small-logos/logo-spotify.svg') }} "
+                                                <img src="{{ asset('dashboard/img/small-logos/logo-spotify.svg') }}"
                                                     class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -137,7 +156,7 @@
                             </ul>
                         </li>
                         <li class="nav-item d-flex align-items-center">
-                            <a href="http://127.0.0.1/Daily/Admin" class="nav-link text-body font-weight-bold px-0">
+                            <a href="{{ asset('dashboard/Admin') }}" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none">Sign In</span>
                             </a>
@@ -150,83 +169,81 @@
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
-                    <div class="card my-4">
+                    <div class="card" style="width: 100%;height: auto; background-color: white;">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="shadow-primary border-radius-lg pt-4 pb-3"
-                                style="display:flex;justify-content: space-between;flex-wrap: nowrap;">
-                                <h6 class="text-capitalize ps-3">Search</h6>
-                                <a href="{{ route('add_post_page') }}">
-                                    <button type="button" id="btn_add_sp"
-                                        class="btn btn-outline-primary btn-sm mb-0"
-                                        style="margin-right: 15px;">Add</button>
-                                </a>
-                            </div>
                         </div>
                         <div class="card-body px-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                                                style="width: 0.1%;">STT</th>
-                                            <th
-                                                class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                                UserID</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Title</th>
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Description</th> --}}
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Image</th>
-                                            <th class="text-secondary opacity-7"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-tbody-sp">
-                                        <?php $count = 1; ?>
-                                        @foreach ($posts as $post)
-                                            <tr>
-                                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
-                                                    style="width: 0.1%;">{{ $count++ }}</th>
-                                                <th
-                                                    class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    {{ $post->user_id }}</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    {{ $post->title }}</th>
-                                                {{-- <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    {{ $post->description }}</th> --}}
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    {{ $post->image }}</th>
-                                                <td class="text-center align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Detial
-                                                    </a>
-                                                    |
-                                                    <a href="{{ route('edit_post_page', $post->id) }}"
-                                                        class="text-secondary font-weight-bold text-xs edit_sp"
-                                                        id="{{ $post->id }}" data-toggle="tooltip"
-                                                        data-original-title="Update post">
-                                                        Update
-                                                    </a>
-                                                    |
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs delete_sp"
-                                                        id="{{ $post->id }}" data-toggle="tooltip"
-                                                        data-original-title="Delete post">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="table-responsive p-0" id="box-detail-edit">
+                            </div>
+                            <div class="Styles__InfoPage">
+                                <div class="info-row">
+                                    <div class="info-left-addsp">
+                                        <div class="Style__AccountInfo">
+
+                                            <form class="form-edit-sp" id="form-edit-sp" method="post"
+                                                action="{ route('edit_post') }}" enctype="multipart/form-data">
+                                                @csrf
+
+                                                <div class="my-form-control">
+                                                    <label class="input-label">Post</label>
+                                                    <div>
+                                                        <div class="Style__StyleInput">
+                                                            <input class="input_fullName" id="tensp"
+                                                                type="text" name="title" maxlength="128"
+                                                                placeholder="Add Title Post" value=" {{ $post->title }}">
+                                                            <div>
+                                                                <small class="small">
+                                                                    @error('title')
+                                                                        <div class="error">{{ $message }}</div>
+                                                                    @enderror
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="my-form-control">
+                                                    <label class="input-label">Description</label>
+                                                    <div>
+                                                        <div class="Style__StyleInput">
+                                                            <textarea id="editor" placeholder="Not Empty!" name="description"> {{ $post->description }}</textarea>
+                                                            <div>
+                                                                <small class="small">
+                                                                    @error('description')
+                                                                        <div class="error">{{ $message }}</div>
+                                                                    @enderror
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="my-form-control">
+                                                    <label class="input-label">Image</label>
+                                                    <div>
+                                                        <input class="input_fullName" type="file" id="image_post"
+                                                            name="image" accept="image/png, image/jpeg" src="{{ asset($post->image) }}"/>
+                                                            <div>
+                                                                <small class="small">
+                                                                    @error('image')
+                                                                        <div class="error">{{ $message }}</div>
+                                                                    @enderror
+                                                                </small>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <div class="my-form-control">
+                                                    <label class="input-label">&nbsp;</label>
+                                                    <button type="submit" class="Style__StyleBtnSubmit btn-submit"
+                                                        style="width: 175px;">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="info-vertical"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -239,11 +256,84 @@
             </footer>
         </div>
     </main>
+    <div class="fixed-plugin">
+        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+            <i class="material-icons py-2">settings</i>
+        </a>
+        <div class="card shadow-lg">
+            <div class="card-header pb-0 pt-3">
+                <div class="float-start">
+                    <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+                    <p>See our dashboard options.</p>
+                </div>
+                <div class="float-end mt-4">
+                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                        <i class="material-icons">clear</i>
+                    </button>
+                </div>
+                <!-- End Toggle Button -->
+            </div>
+            <hr class="horizontal dark my-1">
+            <div class="card-body pt-sm-3 pt-0">
+                <!-- Sidebar Backgrounds -->
+                <div>
+                    <h6 class="mb-0">Sidebar Colors</h6>
+                </div>
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors my-2 text-start">
+                        <span class="badge filter bg-gradient-primary active" data-color="primary"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-dark" data-color="dark"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-info" data-color="info"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-success" data-color="success"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-warning" data-color="warning"
+                            onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-danger" data-color="danger"
+                            onclick="sidebarColor(this)"></span>
+                    </div>
+                </a>
+                <!-- Sidenav Type -->
+                <div class="mt-3">
+                    <h6 class="mb-0">Sidenav Type</h6>
+                    <p class="text-sm">Choose between 2 different sidenav types.</p>
+                </div>
+                <div class="d-flex">
+                    <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark"
+                        onclick="sidebarType(this)">Dark</button>
+                    <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent"
+                        onclick="sidebarType(this)">Transparent</button>
+                    <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white"
+                        onclick="sidebarType(this)">White</button>
+                </div>
+                <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+                <!-- Navbar Fixed -->
+                <div class="mt-3 d-flex">
+                    <h6 class="mb-0">Navbar Fixed</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
+                            onclick="navbarFixed(this)">
+                    </div>
+                </div>
+                <hr class="horizontal dark my-3">
+                <div class="mt-2 d-flex">
+                    <h6 class="mb-0">Light / Dark</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
+                            onclick="darkMode(this)">
+                    </div>
+                </div>
+                <hr class="horizontal dark my-sm-4">
+            </div>
+        </div>
+    </div>
     <!--   Core JS Files   -->
-    <script src="{{ asset('dashboard/js/core/popper.min.js') }} "></script>
-    <script src="{{ asset('dashboard/js/core/bootstrap.min.js') }} "></script>
-    <script src="{{ asset('dashboard/js/plugins/perfect-scrollbar.min.js') }} "></script>
-    <script src="{{ asset('dashboard/js/plugins/smooth-scrollbar.min.js') }} "></script>
+    <script src="{{ asset('dashboard/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -262,6 +352,10 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('dashboard/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+
 </body>
 
 </html>

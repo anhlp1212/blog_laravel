@@ -81,4 +81,16 @@ class HomeController extends Controller
             }
         }
     }
+
+    public function edit_post_page($post_id)
+    {
+
+        $post = DB::table('posts')
+                ->select('*')
+                ->where('posts.id',intval($post_id));
+        $post = $post->get();
+        $post = $post[0];
+
+        return view('admin.posts.edit_post', ['post' => $post]);
+    }
 }

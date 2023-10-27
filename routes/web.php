@@ -28,4 +28,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/posts', [HomeController::class, 'show_posts'])->name('posts');
     Route::get('/posts/add', [HomeController::class, 'add_post_page'])->name('add_post_page');
     Route::post('/posts/add', [HomeController::class, 'add_post'])->name('add_post');
+
+    Route::get('/posts/edit/{post_id}', [HomeController::class, 'edit_post_page'])->name('edit_post_page');
+    Route::post('/posts/edit_post', [HomeController::class, 'edit_post'])->name('edit_post');
 });
