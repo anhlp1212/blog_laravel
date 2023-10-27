@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('dashboard/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{ asset('dashboard/img/favicon.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('dashboard/img/apple-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('dashboard/img/favicon.png') }}">
     <title>
         Dashboard
     </title>
@@ -13,14 +13,14 @@
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Nucleo Icons -->
-    <link href="{{ asset('dashboard/css/nucleo-icons.css')}}" rel="stylesheet" />
-    <link href="{{ asset('dashboard/css/nucleo-svg.css')}}" rel="stylesheet" />
+    <link href="{{ asset('dashboard/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashboard/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('dashboard/css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('dashboard/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -35,8 +35,8 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                                href="javascript:;">Pages</a></li>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                        </li>
                         <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">Dashboard</h6>
@@ -65,12 +65,12 @@
                                         </a>
                                         <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
                                             aria-labelledby="dropdownTable">
-                                            <li><a class="dropdown-item border-radius-md"
-                                                    href="javascript:;">Action</a></li>
+                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                            </li>
                                             <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
                                                     action</a></li>
-                                            <li><a class="dropdown-item border-radius-md"
-                                                    href="javascript:;">Something else here</a></li>
+                                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                    else here</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('dashboard/img/small-logos/logo-xd.svg')}}"
+                                                        <img src="{{ asset('dashboard/img/small-logos/logo-xd.svg') }}"
                                                             class="avatar avatar-sm me-3" alt="xd">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
@@ -113,22 +113,26 @@
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Ryan Tompson">
-                                                        <img src="{{ asset('dashboard/img/team-1.jpg')}}" alt="team1">
+                                                        <img src="{{ asset('dashboard/img/team-1.jpg') }}"
+                                                            alt="team1">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Romina Hadid">
-                                                        <img src="{{ asset('dashboard/img/team-2.jpg')}}" alt="team2">
+                                                        <img src="{{ asset('dashboard/img/team-2.jpg') }}"
+                                                            alt="team2">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Alexander Smith">
-                                                        <img src="{{ asset('dashboard/img/team-3.jpg')}}" alt="team3">
+                                                        <img src="{{ asset('dashboard/img/team-3.jpg') }}"
+                                                            alt="team3">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Jessica Doe">
-                                                        <img src="{{ asset('dashboard/img/team-4.jpg')}}" alt="team4">
+                                                        <img src="{{ asset('dashboard/img/team-4.jpg') }}"
+                                                            alt="team4">
                                                     </a>
                                                 </div>
                                             </td>
@@ -154,7 +158,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('dashboard/img/small-logos/logo-atlassian.svg')}}"
+                                                        <img src="{{ asset('dashboard/img/small-logos/logo-atlassian.svg') }}"
                                                             class="avatar avatar-sm me-3" alt="atlassian">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
@@ -167,12 +171,14 @@
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Romina Hadid">
-                                                        <img src="{{ asset('dashboard/img/team-2.jpg')}}" alt="team5">
+                                                        <img src="{{ asset('dashboard/img/team-2.jpg') }}"
+                                                            alt="team5">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Jessica Doe">
-                                                        <img src="{{ asset('dashboard/img/team-4.jpg')}}" alt="team6">
+                                                        <img src="{{ asset('dashboard/img/team-4.jpg') }}"
+                                                            alt="team6">
                                                     </a>
                                                 </div>
                                             </td>
@@ -198,7 +204,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('dashboard/img/small-logos/logo-slack.svg')}}"
+                                                        <img src="{{ asset('dashboard/img/small-logos/logo-slack.svg') }}"
                                                             class="avatar avatar-sm me-3" alt="team7">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
@@ -211,12 +217,14 @@
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Romina Hadid">
-                                                        <img src="{{ asset('dashboard/img/team-3.jpg')}}" alt="team8">
+                                                        <img src="{{ asset('dashboard/img/team-3.jpg') }}"
+                                                            alt="team8">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Jessica Doe">
-                                                        <img src="{{ asset('dashboard/img/team-1.jpg')}}" alt="team9">
+                                                        <img src="{{ asset('dashboard/img/team-1.jpg') }}"
+                                                            alt="team9">
                                                     </a>
                                                 </div>
                                             </td>
@@ -242,7 +250,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('dashboard/img/small-logos/logo-spotify.svg')}}"
+                                                        <img src="{{ asset('dashboard/img/small-logos/logo-spotify.svg') }}"
                                                             class="avatar avatar-sm me-3" alt="spotify">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
@@ -255,22 +263,26 @@
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Ryan Tompson">
-                                                        <img src="{{ asset('dashboard/img/team-4.jpg')}}" alt="user1">
+                                                        <img src="{{ asset('dashboard/img/team-4.jpg') }}"
+                                                            alt="user1">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Romina Hadid">
-                                                        <img src="{{ asset('dashboard/img/team-3.jpg')}}" alt="user2">
+                                                        <img src="{{ asset('dashboard/img/team-3.jpg') }}"
+                                                            alt="user2">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Alexander Smith">
-                                                        <img src="{{ asset('dashboard/img/team-4.jpg')}}" alt="user3">
+                                                        <img src="{{ asset('dashboard/img/team-4.jpg') }}"
+                                                            alt="user3">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Jessica Doe">
-                                                        <img src="{{ asset('dashboard/img/team-1.jpg')}}" alt="user4">
+                                                        <img src="{{ asset('dashboard/img/team-1.jpg') }}"
+                                                            alt="user4">
                                                     </a>
                                                 </div>
                                             </td>
@@ -296,7 +308,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('dashboard/img/small-logos/logo-jira.svg')}}"
+                                                        <img src="{{ asset('dashboard/img/small-logos/logo-jira.svg') }}"
                                                             class="avatar avatar-sm me-3" alt="jira">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
@@ -309,7 +321,8 @@
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Ryan Tompson">
-                                                        <img src="{{ asset('dashboard/img/team-4.jpg')}}" alt="user5">
+                                                        <img src="{{ asset('dashboard/img/team-4.jpg') }}"
+                                                            alt="user5">
                                                     </a>
                                                 </div>
                                             </td>
@@ -335,7 +348,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('dashboard/img/small-logos/logo-invision.svg')}}"
+                                                        <img src="{{ asset('dashboard/img/small-logos/logo-invision.svg') }}"
                                                             class="avatar avatar-sm me-3" alt="invision">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
@@ -348,12 +361,14 @@
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Ryan Tompson">
-                                                        <img src="{{ asset('dashboard/img/team-1.jpg')}}" alt="user6">
+                                                        <img src="{{ asset('dashboard/img/team-1.jpg') }}"
+                                                            alt="user6">
                                                     </a>
                                                     <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                         data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Jessica Doe">
-                                                        <img src="{{ asset('dashboard/img/team-4.jpg')}}" alt="user7">
+                                                        <img src="{{ asset('dashboard/img/team-4.jpg') }}"
+                                                            alt="user7">
                                                     </a>
                                                 </div>
                                             </td>
@@ -549,11 +564,11 @@
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="{{ asset('dashboard/js/core/popper.min.js')}}"></script>
-    <script src="{{ asset('dashboard/js/core/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('dashboard/js/plugins/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{ asset('dashboard/js/plugins/smooth-scrollbar.min.js')}}"></script>
-    <script src="{{ asset('dashboard/js/plugins/chartjs.min.js')}}"></script>
+    <script src="{{ asset('dashboard/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/plugins/chartjs.min.js') }}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -563,10 +578,15 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
+    <script>
+        const list = document.querySelectorAll('.nav-item-link')[0].classList;
+        list.add("active");
+        list.add("bg-gradient-primary");
+    </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('dashboard/js/material-dashboard.min.js?v=3.1.0')}}"></script>
+    <script src="{{ asset('dashboard/js/material-dashboard.min.js?v=3.1.0') }}"></script>
 </body>
 
 </html>
