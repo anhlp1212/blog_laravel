@@ -28,6 +28,15 @@
                     </div>
                     <span class="nav-link-text ms-1">Users</span>
                 </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">All users</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Edit profile</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link nav-item-link text-white " href="{{ route('posts') }}">
@@ -36,6 +45,15 @@
                     </div>
                     <span class="nav-link-text ms-1">Posts</span>
                 </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('posts') }}">All posts</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('add_post_page') }}">New post</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link nav-item-link text-white " href="../pages/notifications.html">
