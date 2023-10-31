@@ -221,7 +221,7 @@
                                                     <label class="input-label">Image</label>
                                                     <div>
                                                         <input class="input_fullName" type="file" id="image_post"
-                                                            name="image" accept="image/png, image/jpeg" src="{{ old('image') }}"/>
+                                                            name="image" accept="image/png, image/jpeg, image/jpg" src="{{ old('image') }}"/>
                                                             <div>
                                                                 <small class="small">
                                                                     @error('image')
