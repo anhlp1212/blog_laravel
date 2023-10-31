@@ -24,7 +24,7 @@ class PostController extends Controller
 
     public function show_posts()
     {
-        $posts = $this->postRepo->getAllOrderByDESC();
+        $posts = $this->postRepo->getAllOrderByDesc();
         return view('admin.posts.posts', ['posts' => $posts]);
     }
 
@@ -38,16 +38,15 @@ class PostController extends Controller
         // Save file on public/images
         $imageName = Carbon::now()->timestamp . '_' . $request->file('image')->getClientOriginalName();
         $request->image->move(public_path('images'), $imageName);
-
         // Insert data on table posts
         $urlImage = 'images/' . $imageName;
         $this->postRepo->create([
-            'user_id' => 1,
+            'user_id' => auth()->guard('admin')->user()->id,
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'image' => $urlImage
         ]);
-        
+
         return redirect()->route('posts');
     }
 }

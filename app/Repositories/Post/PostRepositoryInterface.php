@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Post;
 
 use App\Repositories\RepositoryInterface;
@@ -6,6 +7,5 @@ use App\Repositories\RepositoryInterface;
 interface PostRepositoryInterface extends RepositoryInterface
 {
     //
-    public function getAllOrderByDESC();
-
+    public function getAllOrderByDesc();
 }
