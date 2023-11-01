@@ -1,4 +1,5 @@
 <!--   Core JS Files   -->
+<script src="{{ asset('dashboard/js/42d5adcbca.js') }}" crossorigin="anonymous"></script> <!-- Font Awesome Icons -->
 <script src="{{ asset('dashboard/js/core/popper.min.js') }} "></script>
 <script src="{{ asset('dashboard/js/core/bootstrap.min.js') }} "></script>
 <script src="{{ asset('dashboard/js/plugins/perfect-scrollbar.min.js') }} "></script>
@@ -28,11 +29,5 @@
         }
     };
 </script>
-<!-- Github buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('dashboard/js/material-dashboard.min.js?v=3.1.0') }}"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-</script>

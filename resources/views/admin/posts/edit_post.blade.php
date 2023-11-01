@@ -5,7 +5,7 @@
     @include('admin.layouts.header_post')
 
     <!-- TinyMCE CDN -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{!! url('assets/tinymce/js/tinymce/tinymce.min.js') !!}" referrerpolicy="origin"></script>
 
     <script>
         tinymce.init({
@@ -26,7 +26,7 @@
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
-                    <div class="card" style="width: 100%;height: auto; background-color: white;">
+                    <div class="card">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -47,8 +47,8 @@
                                                         <div class="Style__StyleInput">
                                                             <input type="hidden" name="id"
                                                                 value="{{ $post->id }}">
-                                                            <input class="input_fullName" id="tensp"
-                                                                type="text" name="title" maxlength="128"
+                                                            <input class="input_fullName" id="tensp" type="text"
+                                                                name="title" maxlength="128"
                                                                 placeholder="Add Title Post"
                                                                 value=" {{ $post->title }}">
                                                             <div>
@@ -100,8 +100,8 @@
                                                 <br />
                                                 <div class="my-form-control">
                                                     <label class="input-label">&nbsp;</label>
-                                                    <button type="submit" class="Style__StyleBtnSubmit btn-submit"
-                                                        style="width: 175px;">Save</button>
+                                                    <button type="submit"
+                                                        class="Style__StyleBtnSubmit btn-submit">Save</button>
                                                 </div>
                                             </form>
                                         </div>

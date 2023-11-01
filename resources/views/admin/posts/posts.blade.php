@@ -22,8 +22,7 @@
                                 style="display:flex;justify-content: space-between;flex-wrap: nowrap;">
                                 <h6 class="text-capitalize ps-3">Search</h6>
                                 <a href="{{ route('add_post_page') }}">
-                                    <button type="button" id="btn_add_sp"
-                                        class="btn btn-outline-primary btn-sm mb-0"
+                                    <button type="button" id="btn_add_sp" class="btn btn-outline-primary btn-sm mb-0"
                                         style="margin-right: 15px;">Add</button>
                                 </a>
                             </div>
@@ -33,17 +32,15 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                                                style="width: 0.1%;">STT</th>
+                                            <th
+                                                class="text-uppercase text-center text-xxs font-weight-bolder opacity-7">
+                                                STT</th>
                                             <th
                                                 class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
                                                 UserID</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase text-center text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Title</th>
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Description</th> --}}
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Image</th>
@@ -54,19 +51,17 @@
                                         <?php $count = 1; ?>
                                         @foreach ($posts as $post)
                                             <tr>
-                                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
-                                                    style="width: 0.1%;">{{ $count++ }}</th>
+                                                <th
+                                                    class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    {{ $count++ }}</th>
                                                 <th
                                                     class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
                                                     {{ $post->user_id }}</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                     {{ $post->title }}</th>
-                                                {{-- <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    {{ $post->description }}</th> --}}
                                                 <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                     {{ $post->image }}</th>
                                                 <td class="text-center align-middle">
                                                     <a href="javascript:;"
