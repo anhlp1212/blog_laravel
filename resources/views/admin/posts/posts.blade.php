@@ -21,7 +21,7 @@
                             <div class="shadow-primary border-radius-lg pt-4 pb-3"
                                 style="display:flex;justify-content: space-between;flex-wrap: nowrap;">
                                 <h6 class="text-capitalize ps-3">Search</h6>
-                                <a href="{{ route('add_post_page') }}">
+                                <a href="{{ route('post.add_post_page') }}">
                                     <button type="button" id="btn_add_sp" class="btn btn-outline-primary btn-sm mb-0"
                                         style="margin-right: 15px;">Add</button>
                                 </a>
@@ -70,7 +70,7 @@
                                                         Detial
                                                     </a>
                                                     |
-                                                    <a href="{{ route('edit_post_page', $post->id) }}"
+                                                    <a href="{{ route('post.edit_post_page', $post->id) }}"
                                                         class="text-secondary font-weight-bold text-xs edit_sp"
                                                         id="{{ $post->id }}" data-toggle="tooltip"
                                                         data-original-title="Update post">

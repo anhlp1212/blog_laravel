@@ -4,15 +4,8 @@
 <head>
     @include('admin.layouts.header_post')
 
-    <!-- TinyMCE CDN -->
-    <script src="{!! url('assets/tinymce/js/tinymce/tinymce.min.js') !!}" referrerpolicy="origin"></script>
-
-    <script>
-        tinymce.init({
-            selector: 'textarea#editor',
-        });
-    </script>
-
+    <!-- Insert the blade containing the TinyMCE configuration and source script -->
+    <x-head.tinymce-config/>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -38,7 +31,7 @@
                                         <div class="Style__AccountInfo">
 
                                             <form class="form-edit-sp" id="form-edit-sp" method="post"
-                                                action="{{ route('edit_post') }}" enctype="multipart/form-data">
+                                                action="{{ route('post.edit_post') }}" enctype="multipart/form-data">
                                                 @csrf
 
                                                 <div class="my-form-control">
@@ -66,7 +59,8 @@
                                                     <label class="input-label">Description</label>
                                                     <div>
                                                         <div class="Style__StyleInput">
-                                                            <textarea id="editor" placeholder="Not Empty!" name="description"> {{ $post->description }}</textarea>
+                                                            <!-- Insert the blade containing the TinyMCE placeholder HTML element -->
+                                                            <textarea id="myeditorinstance" placeholder="Not Empty!" name="description"> {{ $post->description }}</textarea>
                                                             <div>
                                                                 <small class="small">
                                                                     @error('description')

@@ -4,15 +4,8 @@
 <head>
     @include('admin.layouts.header_post')
 
-    <!-- TinyMCE CDN -->
-    <script src="{!! url('assets/tinymce/js/tinymce/tinymce.min.js') !!}" referrerpolicy="origin"></script>
-
-    <script>
-        tinymce.init({
-            selector: 'textarea#editor',
-        });
-    </script>
-
+    <!-- Insert the blade containing the TinyMCE configuration and source script -->
+    <x-head.tinymce-config/>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -37,7 +30,7 @@
                                     <div class="info-left-addsp">
                                         <div class="Style__AccountInfo">
                                             <form class="form-add-sp" id="form-add-sp" method="post"
-                                                action="{{ route('add_post') }}" enctype="multipart/form-data">
+                                                action="{{ route('post.add_post') }}" enctype="multipart/form-data">
                                                 @csrf
 
                                                 <div class="my-form-control">
@@ -63,7 +56,8 @@
                                                     <label class="input-label">Description</label>
                                                     <div>
                                                         <div class="Style__StyleInput">
-                                                            <textarea id="editor" placeholder="Not Empty!" name="description">{{ old('description') }}</textarea>
+                                                            <!-- Insert the blade containing the TinyMCE placeholder HTML element -->
+                                                            <textarea id="myeditorinstance" placeholder="Not Empty!" name="description">{{ old('description') }}</textarea>
                                                             <div>
                                                                 <small class="small">
                                                                     @error('description')
@@ -82,7 +76,7 @@
                                                             id="box_image_post">
                                                         <input class="input_fullName" type="file" id="image_post"
                                                             name="image" accept="image/png, image/jpeg, image/jpg"
-                                                            src="{{ old('image') }}" />
+                                                            src="{{ old('image') }}" onchange="loadFile(event)" />
                                                         <div>
                                                             <small class="small">
                                                                 @error('image')

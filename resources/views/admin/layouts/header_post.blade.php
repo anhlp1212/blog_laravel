@@ -5,11 +5,11 @@
 </title>
 
 <!-- Nucleo Icons -->
-<link href="{{ asset('dashboard/css/nucleo-icons.css') }}" rel="stylesheet" />
-<link href="{{ asset('dashboard/css/nucleo-svg.css') }}" rel="stylesheet" />
+<link href="{{ mix('/css/nucleo-icons.css') }}" rel="stylesheet" />
+<link href="{{ mix('/css/nucleo-svg.css') }}" rel="stylesheet" />
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 <!-- CSS Files -->
-<link id="pagestyle" href="{{ asset('dashboard/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
+<link id="pagestyle" href="{{ mix('/css/material-dashboard.css') }}" rel="stylesheet" />
 <!--CSS-->
-<link href="{{ asset('dashboard/css/Post/style.css?v=0.1') }}" rel="stylesheet" />
+<link href="{{ mix('/css/Post/style.css') }}" rel="stylesheet" />

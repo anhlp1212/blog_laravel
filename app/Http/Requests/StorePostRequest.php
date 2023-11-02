@@ -26,7 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required', $isUnique, 'max:255'],
             'description' => 'required',
-            'image' => [$isRequired,'image','max:5000']
+            'image' => [$isRequired, 'image', 'max:5000']
         ];
     }
 
