@@ -3,10 +3,6 @@
 <title>
     {{ $title ?? 'Title' }}
 </title>
-
-<!-- Nucleo Icons -->
-<link href="{{ mix('/css/nucleo-icons.css') }}" rel="stylesheet" />
-<link href="{{ mix('/css/nucleo-svg.css') }}" rel="stylesheet" />
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 <!-- CSS Files -->
