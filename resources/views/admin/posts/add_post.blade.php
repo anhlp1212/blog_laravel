@@ -5,7 +5,7 @@
     @include('admin.layouts.header_post')
 
     <!-- Insert the blade containing the TinyMCE configuration and source script -->
-    <x-head.tinymce-config/>
+    @vite(['resources/js/app.js'])
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
