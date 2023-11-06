@@ -48,8 +48,8 @@ class PostController extends Controller
                 'description' => $data['description'],
                 'image' => $urlImage
             ]);
-            return redirect()->route('post.posts');
         }
+        return redirect()->route('post.posts');
     }
 
     public function edit_post_page($post_id)

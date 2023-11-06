@@ -21,10 +21,13 @@
                             <div class="shadow-primary border-radius-lg pt-4 pb-3"
                                 style="display:flex;justify-content: space-between;flex-wrap: nowrap;">
                                 <h6 class="text-capitalize ps-3">Search</h6>
-                                <a href="{{ route('post.add_post_page') }}">
-                                    <button type="button" id="btn_add_sp" class="btn btn-outline-primary btn-sm mb-0"
-                                        style="margin-right: 15px;">Add</button>
-                                </a>
+                                @if (Route::has('post.add_post_page'))
+                                    <a href="{{ route('post.add_post_page') }}">
+                                        <button type="button" id="btn_add_sp"
+                                            class="btn btn-outline-primary btn-sm mb-0"
+                                            style="margin-right: 15px;">Add</button>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -48,44 +51,48 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-tbody-sp">
-                                        <?php $count = 1; ?>
-                                        @foreach ($posts as $post)
-                                            <tr>
-                                                <th
-                                                    class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    {{ $count++ }}</th>
-                                                <th
-                                                    class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    {{ $post->user_id }}</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    {{ $post->title }}</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    {{ $post->image }}</th>
-                                                <td class="text-center align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Detial
-                                                    </a>
-                                                    |
-                                                    <a href="{{ route('post.edit_post_page', $post->id) }}"
-                                                        class="text-secondary font-weight-bold text-xs edit_sp"
-                                                        id="{{ $post->id }}" data-toggle="tooltip"
-                                                        data-original-title="Update post">
-                                                        Update
-                                                    </a>
-                                                    |
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs delete_sp"
-                                                        id="{{ $post->id }}" data-toggle="tooltip"
-                                                        data-original-title="Delete post">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        @if (isset($posts))
+                                            <?php $count = 1; ?>
+                                            @foreach ($posts as $post)
+                                                <tr>
+                                                    <th
+                                                        class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
+                                                        {{ $count++ }}</th>
+                                                    <th
+                                                        class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
+                                                        {{ $post->user_id }}</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                        {{ $post->title }}</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                        {{ $post->image }}</th>
+                                                    <td class="text-center align-middle">
+                                                        <a href="javascript:;"
+                                                            class="text-secondary font-weight-bold text-xs"
+                                                            data-toggle="tooltip" data-original-title="Edit user">
+                                                            Detial
+                                                        </a>
+                                                        |
+                                                        @if (Route::has('post.edit_post_page'))
+                                                            <a href="{{ route('post.edit_post_page', $post->id) }}"
+                                                                class="text-secondary font-weight-bold text-xs edit_sp"
+                                                                id="{{ $post->id }}" data-toggle="tooltip"
+                                                                data-original-title="Update post">
+                                                                Update
+                                                            </a>
+                                                        @endif
+                                                        |
+                                                        <a href="javascript:;"
+                                                            class="text-secondary font-weight-bold text-xs delete_sp"
+                                                            id="{{ $post->id }}" data-toggle="tooltip"
+                                                            data-original-title="Delete post">
+                                                            Delete
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
