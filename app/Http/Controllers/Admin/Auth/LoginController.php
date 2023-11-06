@@ -11,7 +11,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         if ($request->getMethod() == 'GET') {
-            return view('admin.auth.login');
+            return view('admin.auth.login',['title' => 'Admin Login']);
         }
         else if ($request->getMethod() == 'POST') {
             $request->validate([

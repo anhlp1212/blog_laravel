@@ -1,4 +1,3 @@
-<script src="{{ mix('/js/core/bootstrap.min.js') }} "></script>
 <script>
     function loadFile(event) {
         var image = document.querySelector('#box_image_post');
