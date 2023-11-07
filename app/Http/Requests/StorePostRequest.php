@@ -21,10 +21,12 @@ class StorePostRequest extends FormRequest
      */
     public function rules(): array
     {
+        $isRequired = isset($this->id) ? 'nullable' : 'required';
+        $isUnique = isset($this->id) ? 'nullable' : 'unique:posts';
         return [
-            'title' => 'required|unique:posts|max:255',
+            'title' => ['required', $isUnique, 'max:255'],
             'description' => 'required',
-            'image' => 'required|image|max:5000'
+            'image' => [$isRequired, 'image', 'max:5000']
         ];
     }
 

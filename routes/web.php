@@ -21,13 +21,19 @@ Route::get('/', [PostController::class, 'index'])->name('index');
 
 //Admin
 Route::prefix('admin')->group(function () {
-    Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('admin.login');
+    Route::get('/login', [LoginController::class, 'index'])->name('admin.index');
+    Route::post('/login', [LoginController::class, 'login'])->name('admin.login');
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     });
 
-    Route::get('/posts', [PostController::class, 'show_posts'])->name('posts');
-    Route::get('/posts/add', [PostController::class, 'add_post_page'])->name('add_post_page');
-    Route::post('/posts/add', [PostController::class, 'add_post'])->name('add_post');
+    Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
+        Route::get('/', [PostController::class, 'show_posts'])->name('posts');
+        Route::get('/add', [PostController::class, 'add_post_page'])->name('add_post_page');
+        Route::post('/add', [PostController::class, 'add_post'])->name('add_post');
+
+        Route::get('/edit/{post_id}', [PostController::class, 'edit_post_page'])->name('edit_post_page');
+        Route::post('/edit_post', [PostController::class, 'edit_post'])->name('edit_post');
+    });
 });

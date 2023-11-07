@@ -3,28 +3,22 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function index()
     {
-        if ($request->getMethod() == 'GET') {
-            return view('admin.auth.login');
-        }
-        else if ($request->getMethod() == 'POST') {
-            $request->validate([
-                'email' => 'required|email',
-                'password' => 'required',
-            ]);
+        return view('admin.auth.login', ['title' => 'Admin Login']);
+    }
 
-            $credentials = $request->only(['email', 'password']);
-            if (Auth::guard('admin')->attempt($credentials)) {
-                return redirect()->route('dashboard');
-            } else {
-                return redirect()->back()->withInput()->with('error_pw_e', 'Email or Password not true');
-            }
+    public function login(LoginRequest $request)
+    {
+        $credentials = $request->only(['email', 'password']);
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->route('dashboard');
         }
+        return redirect()->back()->withInput();
     }
 }
