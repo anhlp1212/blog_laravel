@@ -1,5 +1,3 @@
-import './bootstrap';
-
 import 'tinymce/tinymce';
 import 'tinymce/skins/ui/oxide/skin.min.css';
 import 'tinymce/skins/content/default/content.min.css';
@@ -20,3 +18,5 @@ window.addEventListener('DOMContentLoaded', () => {
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
     });
 });
+
+window.$ = window.jQuery = require('jquery')

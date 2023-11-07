@@ -83,4 +83,13 @@ class PostController extends Controller
         );
         return redirect()->route('post.posts');
     }
+
+    public function delete_post($post_id)
+    {
+        $post = $this->postRepo->delete($post_id);
+        if ($post) {
+            return redirect()->back()->with('success', 'IT WORKS!');
+        }
+        return abort(404);
+    }
 }
