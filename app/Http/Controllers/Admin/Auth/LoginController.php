@@ -12,14 +12,13 @@ class LoginController extends Controller
     {
         return view('admin.auth.login', ['title' => 'Admin Login']);
     }
+
     public function login(LoginRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
         if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('dashboard');
-        } else {
-            return redirect()->back()->withInput();
         }
-        return view('admin.auth.login', ['title' => 'Admin Login']);
+        return redirect()->back()->withInput();
     }
 }

@@ -46,7 +46,7 @@
                                                                     <small class="small">
                                                                         @error('title')
                                                                             <div class="error">
-                                                                                {{ isset($message) ? $message : 'Error' }}
+                                                                                {{ $message ?? 'Error' }}
                                                                             </div>
                                                                         @enderror
                                                                     </small>
@@ -65,7 +65,7 @@
                                                                     <small class="small">
                                                                         @error('description')
                                                                             <div class="error">
-                                                                                {{ isset($message) ? $message : 'Error' }}
+                                                                                {{ $message ?? 'Error' }}
                                                                             </div>
                                                                         @enderror
                                                                     </small>
@@ -86,7 +86,7 @@
                                                                 <small class="small">
                                                                     @error('image')
                                                                         <div class="error">
-                                                                            {{ isset($message) ? $message : 'Error' }}</div>
+                                                                            {{ $message ?? 'Error' }}</div>
                                                                     @enderror
                                                                 </small>
                                                             </div>

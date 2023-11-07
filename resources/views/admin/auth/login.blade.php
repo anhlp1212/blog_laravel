@@ -47,14 +47,14 @@
                                                 value="{{ old('email') }}">
                                         </div>
                                         @error('email')
-                                            <div class="error">{{ isset($message) ? $message : 'Error' }}</div>
+                                            <div class="error">{{ $message ?? 'Error' }}</div>
                                         @enderror
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Password</label>
                                             <input type="password" class="form-control" id="password" name="password">
                                         </div>
                                         @error('password')
-                                            <div class="error">{{ isset($message) ? $message : 'Error' }}</div>
+                                            <div class="error">{{ $message ?? 'Error' }}</div>
                                         @enderror
                                         <div class="form-check form-switch d-flex align-items-center mb-3">
                                             <input class="form-check-input" type="checkbox" id="rememberMe" checked>
