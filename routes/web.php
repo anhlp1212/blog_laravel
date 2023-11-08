@@ -36,6 +36,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{post_id}', [PostController::class, 'edit_post_page'])->name('edit_post_page');
         Route::post('/edit_post', [PostController::class, 'edit_post'])->name('edit_post');
 
-        Route::get('/delete_post/{post_id}', [PostController::class, 'delete_post'])->name('delete_post');
+        Route::delete('/delete_post/{post_id}', [PostController::class, 'delete_post'])->name('delete_post');
     });
 });

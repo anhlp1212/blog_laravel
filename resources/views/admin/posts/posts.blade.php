@@ -3,12 +3,8 @@
 
 <head>
     @include('admin.layouts.header_post')
+    <script src="{{ mix('js/app.js') }}"></script>
 
-    <script src="{{ mix('/js/app.js') }}"></script>
-    {{-- Em xin phep dung link de thu nghiem truoc, thay ap dung duoc em se import thu vien vao --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -57,53 +53,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-tbody-sp">
-                                        @if (isset($posts))
-                                            <?php $count = 1; ?>
-                                            @foreach ($posts as $post)
-                                                <tr>
-                                                    <th
-                                                        class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                                        {{ $count++ }}</th>
-                                                    <th
-                                                        class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                                        {{ $post->user_id }}</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        {{ $post->title }}</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                        {{ $post->image }}</th>
-                                                    <td class="text-center align-middle">
-                                                        <a href="javascript:;"
-                                                            class="text-secondary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Detial
-                                                        </a>
-                                                        |
-                                                        @if (Route::has('post.edit_post_page'))
-                                                            <a href="{{ route('post.edit_post_page', $post->id) }}"
-                                                                class="text-secondary font-weight-bold text-xs edit_sp"
-                                                                id="{{ $post->id }}" data-toggle="tooltip"
-                                                                data-original-title="Update post">
-                                                                Update
-                                                            </a>
-                                                        @endif
-                                                        |
-                                                        @if (Route::has('post.delete_post'))
-                                                            <a class="text-secondary font-weight-bold text-xs delete_post"
-                                                                id="{{ $post->id }}" data-toggle="tooltip"
-                                                                onclick="confirmation(event)"
-                                                                href="{{ route('post.delete_post', $post->id) }}"
-                                                                data-original-title="Delete post">
-                                                                Delete
-                                                            </a>
-                                                            {{-- onclick="return confirm('Are you sure?')" --}}
-                                                            {{-- href="{{ route('post.delete_post', $post->id) }}" --}}
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
+                                        @include('admin.posts.table_posts_data')
                                     </tbody>
                                 </table>
                             </div>
@@ -117,23 +67,51 @@
                 </div>
             </footer>
         </div>
+
+        {{-- Popup confirm --}}
+        @include('layouts.confirm')
+
+        {{-- Popup toast  --}}
+        @include('layouts.toast')
+
     </main>
     @include('admin.layouts.footer_post')
 
     <script>
-        function confirmation(event) {
-            event.preventDefault();
-            var urlToRedirect = event.currentTarget.getAttribute('href');
-            swal({
-                title: "Are you sure?",
-                text: "We are going to delete this post",
-                dangerMode: true,
-                cancelButtonClass: 'red',
-            })
-            .then((willCancel)=>{
-                window.location.href = urlToRedirect;
+        $(".delete_post").on("click", function(event) {
+            var post_id = $(this).attr("id");
+            $("#mi-modal").modal('show');
+
+            // Yes
+            $("#modal-btn-yes").on("click", function() {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/admin/posts/delete_post/" + post_id,
+                    method: "DELETE",
+                    success: function(response) {
+                        // event.target.parentElement.parentElement.remove();
+                        location.reload(); 
+                        $("#liveToast").toast({
+                            animation: false,
+                            autohide: true,
+                            delay: 3000
+                        }).toast('show');
+                    },
+                    error: function(error) {
+                        console.error("Error deleting post:", error);
+                    }
+                });
+                $("#mi-modal").modal('hide');
             });
-        }
+
+            // No
+            $("#modal-btn-no").on("click", function() {
+                $("#mi-modal").modal('hide');
+            });
+
+        });
     </script>
 </body>
 

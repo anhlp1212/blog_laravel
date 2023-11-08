@@ -88,7 +88,7 @@ class PostController extends Controller
     {
         $post = $this->postRepo->delete($post_id);
         if ($post) {
-            return redirect()->back()->with('success', 'IT WORKS!');
+            return true;
         }
         return abort(404);
     }
