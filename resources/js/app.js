@@ -20,6 +20,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 });
 
-window.$ = window.jQuery = require('jquery')
-window.Popper = require('popper.js');
-require('bootstrap');
+import Popper from 'popper.js';
+import Bootstrap from 'bootstrap';
+
+import $ from "jquery";
+window.$ = $;
+window.jQuery = $;

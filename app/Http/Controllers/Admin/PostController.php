@@ -93,13 +93,11 @@ class PostController extends Controller
             if ($post) {
                 return response()->json([
                     'status' => 'success',
-                    'data' => [],
                     'message' => 'Deleted successfully!'
                 ], 200);
             } else {
                 return response()->json([
                     'status' => 'false',
-                    'data' => [],
                     'message' => 'Error'
                 ], 200);
             }
