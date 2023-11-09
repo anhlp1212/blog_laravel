@@ -91,7 +91,6 @@
                     url: "/admin/posts/delete_post/" + post_id,
                     method: "DELETE",
                     success: function(response) {
-                        // event.target.parentElement.parentElement.remove();
                         location.reload(); 
                         $("#liveToast").toast({
                             animation: false,
