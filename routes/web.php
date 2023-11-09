@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,10 @@ Route::prefix('admin')->group(function () {
         Route::post('/edit_post', [PostController::class, 'edit_post'])->name('edit_post');
 
         Route::delete('/delete_post/{post_id}', [PostController::class, 'delete_post'])->name('delete_post');
+    });
+
+    Route::group(['prefix' => 'users', 'as' => 'user.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('users');
+        Route::get('/{user_id}', [UserController::class, 'detail'])->name('detail');
     });
 });
