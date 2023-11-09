@@ -1,9 +1,8 @@
 @if (isset($posts))
-    <?php $count = 1; ?>
     @foreach ($posts as $post)
         <tr>
             <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                {{ $count++ }}
+                {{ $post->id  }}
             </th>
             <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
                 {{ $post->user_id }}

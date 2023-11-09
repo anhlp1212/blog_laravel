@@ -39,10 +39,10 @@
                                         <tr>
                                             <th
                                                 class="text-uppercase text-center text-xxs font-weight-bolder opacity-7">
-                                                STT</th>
+                                                ID</th>
                                             <th
                                                 class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                                UserID</th>
+                                                User_Created</th>
                                             <th
                                                 class="text-uppercase text-center text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Title</th>
@@ -85,13 +85,19 @@
             // Yes
             $("#modal-btn-yes").on("click", function() {
                 $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
                     url: "/admin/posts/delete_post/" + post_id,
                     method: "DELETE",
                     success: function(response) {
-                        location.reload(); 
+                        event.target.parentElement.parentElement.remove();
+                        $('#messageAjax').html(response.message)
+                        const listClass = document.getElementById("liveToast").classList;
+                        if (response.status == "success") {
+                            listClass.remove("text-bg-error");
+                            listClass.toggle("text-bg-success");
+                        } else {
+                            listClass.remove("text-bg-success");
+                            listClass.toggle("text-bg-error");
+                        }
                         $("#liveToast").toast({
                             animation: false,
                             autohide: true,

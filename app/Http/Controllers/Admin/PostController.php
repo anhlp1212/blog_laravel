@@ -6,6 +6,8 @@ use App\Repositories\Post\PostRepository;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Http\Requests\StorePostRequest;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -86,10 +88,23 @@ class PostController extends Controller
 
     public function delete_post($post_id)
     {
-        $post = $this->postRepo->delete($post_id);
-        if ($post) {
-            return true;
+        try {
+            $post = $this->postRepo->delete($post_id);
+            if ($post) {
+                return response()->json([
+                    'status' => 'success',
+                    'data' => [],
+                    'message' => 'Deleted successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'false',
+                    'data' => [],
+                    'message' => 'Error'
+                ], 200);
+            }
+        } catch (Exception $e) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
         }
-        return abort(404);
     }
 }
