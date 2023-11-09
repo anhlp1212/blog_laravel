@@ -15,23 +15,18 @@
         <!-- Navbar -->
         @include('admin.layouts.nav_bar')
         <!-- End Navbar -->
-        <div class="container-fluid py-4">
+        <div class="container-fluid py-1">
             <div class="row">
                 <div class="col-12">
+                    @if (Route::has('post.add_post_page'))
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ route('post.add_post_page') }}">
+                            <button type="button" id="btn_add_sp"
+                                class="btn btn-outline-primary mb-0 me-md-2 bg-white">Add</button>
+                        </a>
+                    </div>
+                    @endif
                     <div class="card my-4">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="shadow-primary border-radius-lg pt-4 pb-3"
-                                style="display:flex;justify-content: space-between;flex-wrap: nowrap;">
-                                <h6 class="text-capitalize ps-3">Search</h6>
-                                @if (Route::has('post.add_post_page'))
-                                    <a href="{{ route('post.add_post_page') }}">
-                                        <button type="button" id="btn_add_sp"
-                                            class="btn btn-outline-primary btn-sm mb-0"
-                                            style="margin-right: 15px;">Add</button>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
@@ -72,9 +67,10 @@
                                                         {{ $user->role }}
                                                     </th> --}}
                                                     <td class="text-center align-middle">
-                                                        <a class="btn btn-info btn-sm"
+                                                        <a class="btn btn-success btn-sm"
                                                             href="{{ route('user.detail', $user->id) }}">Show</a>
-                                                        <a class="btn btn-primary btn-sm" href="#">Edit</a>
+                                                        <a class="btn btn-info btn-sm" href="#">Edit</a>
+                                                        <a class="btn btn-primary btn-sm" href="#">Delete</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -14,11 +14,7 @@
         <!-- Navbar -->
         @include('admin.layouts.nav_bar')
         <!-- End Navbar -->
-        <div class="container-fluid px-2 px-md-4">
-            <div class="page-header min-height-300 border-radius-xl mt-4"
-                style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
-                <span class="mask  bg-gradient-primary  opacity-6"></span>
-            </div>
+        <div class="">
             <div class="card card-body mx-3 mx-md-4 mt-n6">
                 <div class="row gx-4 mb-2">
                     <div class="col-auto my-auto">
@@ -51,15 +47,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 mt-4">
-                            <a class="btn btn-info btn-sm" href="{{ route('user.detail', $user->id) }}">Edit</a>
-                            <a class="btn btn-primary btn-sm" href="#">Delete</a>
+                        <div class="col-12 mt-4 d-grid gap-2 d-md-flex" style="justify-content: space-between;">
+                            <div>
+                                <a class="btn btn-info btn-sm" href="{{ route('user.detail', $user->id) }}">Edit</a>
+                                <a class="btn btn-primary btn-sm" href="#">Delete</a>
+                            </div>
+                            <div class="justify-content-md-end">
+                                <a class="btn btn-secondary btn-sm me-md-2"
+                                    href="{{ route('user.users') }}">Back</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 </body>
 
