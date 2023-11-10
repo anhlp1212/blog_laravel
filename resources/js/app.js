@@ -1,5 +1,3 @@
-import './bootstrap';
-
 import 'tinymce/tinymce';
 import 'tinymce/skins/ui/oxide/skin.min.css';
 import 'tinymce/skins/content/default/content.min.css';
@@ -19,4 +17,12 @@ window.addEventListener('DOMContentLoaded', () => {
         plugins: 'code table lists',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
     });
+
 });
+
+import Popper from 'popper.js';
+import Bootstrap from 'bootstrap';
+
+import $ from "jquery";
+window.$ = $;
+window.jQuery = $;

@@ -57,7 +57,7 @@
                     </li>
 
                     <li class="nav-item">
-                        @if (Route::has(''))
+                        @if (Route::has('post.add_post_page'))
                             <a class="nav-link" href="{{ route('post.add_post_page') }}">New post</a>
                         @endif
                     </li>

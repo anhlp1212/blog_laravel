@@ -6,6 +6,8 @@ use App\Repositories\Post\PostRepository;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Http\Requests\StorePostRequest;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -43,7 +45,7 @@ class PostController extends Controller
             // Insert data on table posts
             $urlImage = 'images/' . $imageName;
             $this->postRepo->create([
-                'user_id' => auth()->guard('admin')->user()->id,
+                'admin_id' => auth()->guard('admin')->user()->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'image' => $urlImage
@@ -66,7 +68,7 @@ class PostController extends Controller
     {
         $data = $request->all();
         $dataUpdate = [
-            'user_id' => auth()->guard('admin')->user()->id,
+            'admin_id' => auth()->guard('admin')->user()->id,
             'title' => $data['title'],
             'description' => $data['description'],
         ];
@@ -82,5 +84,25 @@ class PostController extends Controller
             $dataUpdate
         );
         return redirect()->route('post.posts');
+    }
+
+    public function delete_post($post_id)
+    {
+        try {
+            $post = $this->postRepo->delete($post_id);
+            if ($post) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Deleted successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'false',
+                    'message' => 'Error'
+                ], 200);
+            }
+        } catch (Exception $e) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
+        }
     }
 }
