@@ -42,6 +42,11 @@ Route::prefix('admin')->group(function () {
 
     Route::group(['prefix' => 'users', 'as' => 'user.'], function () {
         Route::get('/', [UserController::class, 'index'])->name('users');
+
+        Route::get('/add', [UserController::class, 'add_user_page'])->name('add_user_page');
+        Route::post('/add', [UserController::class, 'add_user'])->name('add_user');
+        Route::post('/add', [UserController::class, 'add_user'])->name('add_user');
+
         Route::get('/{user_id}', [UserController::class, 'detail'])->name('detail');
     });
 });

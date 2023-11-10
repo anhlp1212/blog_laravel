@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepository;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -28,5 +29,15 @@ class UserController extends Controller
         } else {
             return abort(404);
         }
+    }
+
+    public function add_user_page()
+    {
+        return view('admin.users.add_user', ['title' => 'Add User']);
+    }
+
+    public function add_user(UserRequest $request){
+        $data = $request->all();
+        dd($data);
     }
 }
