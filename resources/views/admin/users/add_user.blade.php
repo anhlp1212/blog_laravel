@@ -26,9 +26,12 @@
                                 <div class="info-row">
                                     <div class="info-left-addsp">
                                         <div class="Style__AccountInfo">
+                                            @if (session('warning'))
+                                                <div class="alert alert-warning"> {{ session('warning') }} </div>
+                                            @endif
                                             @if (Route::has('user.add_user'))
                                                 <form class="form-add-user" id="form-add-user" method="post"
-                                                    action="{{ route('user.add_user') }}" enctype="multipart/form-data">
+                                                    action="{{ route('user.add_user') }}">
                                                     @csrf
 
                                                     <div class="my-form-control">
@@ -75,7 +78,8 @@
                                                     <div class="my-form-control">
                                                         <label class="input-label">Choose a Role</label>
                                                         <div>
-                                                            <select class="form-select form-select-lg mb-3" id="roles" name="roles" style="width:30%;">
+                                                            <select class="form-select form-select-lg mb-3"
+                                                                id="roles" name="roles" style="width:30%;">
                                                                 <option value="1">Admin</option>
                                                                 <option value="2">Editor</option>
                                                             </select>
@@ -90,11 +94,40 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="my-form-control">
+                                                        <label class="input-label">Password</label>
+                                                        <div>
+                                                            <div class="Style__StyleInput">
+                                                                <input class="input_fullName" type="password"
+                                                                    name="password" placeholder="Enter Password">
+                                                                <div>
+                                                                    <small class="small">
+                                                                        @error('password')
+                                                                            <div class="error">
+                                                                                {{ $message ?? 'Error' }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="my-form-control">
+                                                        <label class="input-label">Confirm Password</label>
+                                                        <div>
+                                                            <div class="Style__StyleInput">
+                                                                <input class="input_fullName" type="password"
+                                                                    name="password_confirmation"
+                                                                    placeholder="Enter Password to Confirm">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <br />
                                                     <div class="my-form-control">
                                                         <label class="input-label">&nbsp;</label>
-                                                        <button type="submit"
-                                                            class="btn btn-primary">Save</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
                                                 </form>
                                             @endif
