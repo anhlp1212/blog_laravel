@@ -23,10 +23,9 @@ class UserController extends Controller
     public function detail($user_id)
     {
         $user = $this->userRepo->find($user_id);
-        if ($user) {
-            return view('admin.users.detail', ['user' => $user, 'title' => 'User Detail']);
-        } else {
-            return abort(404);
+        if (!$user) {
+            abort(404);
         }
+        return view('admin.users.detail', ['user' => $user, 'title' => 'User Detail']);
     }
 }
