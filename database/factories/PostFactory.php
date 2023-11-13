@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +18,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id,
+            'admin_id' => Admin::all()->random()->id,
             'title' => $this->faker->unique()->sentence(),
             'excerpt' => $this->faker->text(),
             'description' => $this->faker->text(),
