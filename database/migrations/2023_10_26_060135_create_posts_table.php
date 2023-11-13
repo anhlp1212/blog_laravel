@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('admin_id');
             $table->string('title');
             $table->longText('excerpt')->nullable(false);
             $table->longText('description');
             $table->longText('image');
             $table->integer('min_to_read');
-            $table->foreign('user_id')
+            $table->foreign('admin_id')
                 ->references('id')
-                ->on('users')
+                ->on('admins')
                 ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();

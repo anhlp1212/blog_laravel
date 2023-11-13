@@ -45,7 +45,7 @@ class PostController extends Controller
             // Insert data on table posts
             $urlImage = 'images/' . $imageName;
             $this->postRepo->create([
-                'user_id' => auth()->guard('admin')->user()->id,
+                'admin_id' => auth()->guard('admin')->user()->id,
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'image' => $urlImage
@@ -68,7 +68,7 @@ class PostController extends Controller
     {
         $data = $request->all();
         $dataUpdate = [
-            'user_id' => auth()->guard('admin')->user()->id,
+            'admin_id' => auth()->guard('admin')->user()->id,
             'title' => $data['title'],
             'description' => $data['description'],
         ];
@@ -93,13 +93,11 @@ class PostController extends Controller
             if ($post) {
                 return response()->json([
                     'status' => 'success',
-                    'data' => [],
                     'message' => 'Deleted successfully!'
                 ], 200);
             } else {
                 return response()->json([
                     'status' => 'false',
-                    'data' => [],
                     'message' => 'Error'
                 ], 200);
             }
