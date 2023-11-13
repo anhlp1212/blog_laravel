@@ -18,13 +18,13 @@
         <div class="container-fluid py-1">
             <div class="row">
                 <div class="col-12">
-                    @if (Route::has('post.add_post_page'))
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{{ route('post.add_post_page') }}">
-                            <button type="button" id="btn_add_sp"
-                                class="btn btn-outline-primary mb-0 me-md-2 bg-white">Add</button>
-                        </a>
-                    </div>
+                    @if (Route::has('user.add_user_page'))
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ route('user.add_user_page') }}">
+                                <button type="button" id="btn_add_sp"
+                                    class="btn btn-outline-primary mb-0 me-md-2 bg-white">Add</button>
+                            </a>
+                        </div>
                     @endif
                     <div class="card my-4">
                         <div class="card-body px-0 pb-2">
@@ -40,9 +40,9 @@
                                                 Name</th>
                                             <th class="text-uppercase text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Email</th>
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Roles</th> --}}
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Roles</th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
@@ -62,14 +62,18 @@
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                         {{ $user->email }}
                                                     </th>
-                                                    {{-- <th
+                                                    <th
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                        {{ $user->role }}
-                                                    </th> --}}
+                                                        {{ $user->roles == $admin ? 'Admin' : 'Editor'}}
+                                                    </th>
                                                     <td class="text-center align-middle">
-                                                        <a class="btn btn-success btn-sm"
-                                                            href="{{ route('user.detail', $user->id) }}">Show</a>
-                                                        <a class="btn btn-info btn-sm" href="#">Edit</a>
+                                                        @if (Route::has('user.detail'))
+                                                            <a class="btn btn-success btn-sm"
+                                                                href="{{ route('user.detail', $user->id) }}">Show</a>
+                                                        @endif
+                                                        @if (Route::has('user.edit_user_page'))
+                                                            <a class="btn btn-info btn-sm" href="{{ route('user.edit_user_page', $user->id) }}">Edit</a>
+                                                        @endif
                                                         <a class="btn btn-primary btn-sm" href="#">Delete</a>
                                                     </td>
                                                 </tr>

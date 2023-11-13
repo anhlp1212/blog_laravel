@@ -48,11 +48,16 @@
                     </div>
                     <div class="col-12 mt-4 d-grid gap-2 d-md-flex" style="justify-content: space-between;">
                         <div>
-                            <a class="btn btn-info btn-sm" href="{{ route('user.detail', $user->id) }}">Edit</a>
+                            @if (Route::has('user.edit_user_page'))
+                                <a class="btn btn-info btn-sm"
+                                    href="{{ route('user.edit_user_page', $user->id) }}">Edit</a>
+                            @endif
                             <a class="btn btn-primary btn-sm" href="#">Delete</a>
                         </div>
                         <div class="justify-content-md-end">
-                            <a class="btn btn-secondary btn-sm me-md-2" href="{{ route('user.users') }}">Back</a>
+                            @if (Route::has('user.users'))
+                                <a class="btn btn-secondary btn-sm me-md-2" href="{{ route('user.users') }}">Back</a>
+                            @endif
                         </div>
                     </div>
                 </div>

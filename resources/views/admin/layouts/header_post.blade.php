@@ -10,3 +10,5 @@
 <link id="pagestyle" href="{{ mix('/css/material-dashboard.css') }}" rel="stylesheet" />
 <!--CSS-->
 <link href="{{ mix('/css/Post/style.css') }}" rel="stylesheet" />
+
+<script src="{{ mix('js/app.js') }}"></script>
