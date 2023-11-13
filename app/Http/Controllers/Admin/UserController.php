@@ -11,6 +11,8 @@ use Exception;
 class UserController extends Controller
 {
     protected $userRepo;
+    const ADMIN = 1;
+    const EDITOR = 2;
 
     public function __construct(UserRepository $userRepo)
     {
@@ -34,7 +36,7 @@ class UserController extends Controller
 
     public function add_user_page()
     {
-        return view('admin.users.add_user', ['title' => 'Add User']);
+        return view('admin.users.add_user', ['title' => 'Add User', 'admin' => Self::ADMIN, 'editor' => Self::EDITOR]);
     }
 
     public function add_user(UserRequest $request)

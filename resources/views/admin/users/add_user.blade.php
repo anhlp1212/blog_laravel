@@ -80,8 +80,8 @@
                                                         <div>
                                                             <select class="form-select form-select-lg mb-3"
                                                                 id="roles" name="roles" style="width:30%;">
-                                                                <option value="1">Admin</option>
-                                                                <option value="2">Editor</option>
+                                                                <option value="{{ $admin ?? '' }}">Admin</option>
+                                                                <option value="{{ $editor ?? '' }}">Editor</option>
                                                             </select>
                                                             <div>
                                                                 <small class="small">
