@@ -5,7 +5,7 @@
             {{ $post->min_to_read ?? '' }} min. read
         </span>
 
-        <h2 class="text-white sm:pt-0 pt-10 pb-6 text-3xl sm:text-2xl font-bold sm:pb-2 w-full block">
+        <h2 class="sm:pt-0 pt-10 pb-6 text-3xl sm:text-2xl font-bold sm:pb-2 w-full block">
             {{ $post->title ?? '' }}
         </h2>
 

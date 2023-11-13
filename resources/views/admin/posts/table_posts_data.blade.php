@@ -15,14 +15,13 @@
             </th>
             <td class="text-center align-middle">
                 @if (Route::has('post.edit_post_page'))
-                    <a href="{{ route('post.edit_post_page', $post->id) }}" class="btn btn-info btn-sm" id="{{ $post->id }}"
-                        data-toggle="tooltip" data-original-title="Update post">
+                    <a href="{{ route('post.edit_post_page', $post->id) }}" class="btn btn-primary btn-sm"
+                        id="{{ $post->id }}" data-toggle="tooltip" data-original-title="Update post">
                         Update
                     </a>
                 @endif
-
                 @if (Route::has('post.delete_post'))
-                    <a class="btn btn-primary btn-sm delete_post" id="{{ $post->id }}" data-toggle="tooltip"
+                    <a class="btn btn-info btn-sm delete_post" id="{{ $post->id }}" data-toggle="tooltip"
                         data-post-id="{{ $post->id }}" data-original-title="Delete post">
                         Delete
                     </a>
