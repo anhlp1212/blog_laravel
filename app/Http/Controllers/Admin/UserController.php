@@ -75,19 +75,23 @@ class UserController extends Controller
 
     public function edit_user(UserRequest $request)
     {
-        $data = $request->all();
-        $dataUpdate = [
-            'name' => $data['title'],
-            'email' => $data['email'],
-            'roles' => $data['roles'],
-        ];
-        if ($data['password']) {
-            $dataUpdate['password'] = Hash::make($data['password']);
+        try {
+            $data = $request->all();
+            $dataUpdate = [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'roles' => $data['roles'],
+            ];
+            if ($data['password']) {
+                $dataUpdate['password'] = Hash::make($data['password']);
+            }
+            $this->userRepo->update(
+                $data['id'],
+                $dataUpdate
+            );
+            return redirect()->route('user.users');
+        } catch (Exception $e) {
+            return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
-        $this->userRepo->update(
-            $data['id'],
-            $dataUpdate
-        );
-        return redirect()->route('user.users');
     }
 }
