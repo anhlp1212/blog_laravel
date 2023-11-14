@@ -9,5 +9,5 @@
 <!-- CSS Files -->
 <link id="pagestyle" href="{{ mix('/css/material-dashboard.css') }}" rel="stylesheet" />
 <!--CSS-->
-<link href="{{ mix('/css/Post/style.css') }}" rel="stylesheet" />
-<link href="{{ mix('/css/User/style.css') }}" rel="stylesheet" />
+<link href="{{ mix('/css/post/style.css') }}" rel="stylesheet" />
+<link href="{{ mix('/css/user/style.css') }}" rel="stylesheet" />

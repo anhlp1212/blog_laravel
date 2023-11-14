@@ -21,11 +21,11 @@ mix.styles([
 ], 'public/css/material-dashboard.css');
 
 mix.styles([
-    'resources/css/Post/style.css',
-], 'public/css/Post/style.css');
+    'resources/css/post/style.css',
+], 'public/css/post/style.css');
 
 mix.styles([
-    'resources/css/User/style.css',
-], 'public/css/User/style.css');
+    'resources/css/user/style.css',
+], 'public/css/user/style.css');
 
 mix.js('resources/js/app.js', 'public/js').version();

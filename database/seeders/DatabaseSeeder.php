@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call(TruncateAllTables::class);
+
         DB::table('roles')->insert([
             [
                 'name' => 'Admin',
