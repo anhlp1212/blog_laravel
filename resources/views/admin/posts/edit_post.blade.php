@@ -2,10 +2,13 @@
 <html lang="en">
 
 <head>
-    @include('admin.layouts.header_post')
+    @extends('admin.layouts.header_post')
 
-    <!-- Insert the blade containing the TinyMCE configuration and source script -->
-    @vite(['resources/js/app.js'])
+    @section('assets')
+        <link href="{{ mix('/css/post/style.css') }}" rel="stylesheet" />
+    @endsection
+
+    <script src="{{ mix('js/app.js') }}"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">

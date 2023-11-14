@@ -2,7 +2,13 @@
 <html lang="en">
 
 <head>
-    @include('admin.layouts.header_post')
+    @extends('admin.layouts.header_post')
+
+    @section('assets')
+        <link href="{{ mix('/css/user/style.css') }}" rel="stylesheet" />
+    @endsection
+
+    <script src="{{ mix('js/app.js') }}"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -80,22 +86,24 @@
                                                     <div class="my-form-control">
                                                         <label class="input-label">Choose a Role</label>
                                                         <div>
-                                                            <select class="form-select form-select-lg mb-3"
-                                                                id="roles" name="roles" style="width:30%;">
-                                                                <option value="{{ $admin ?? '' }}"
-                                                                    {{ $user->roles == $admin ? 'selected' : '' }}>Admin</option>
-                                                                <option value="{{ $editor ?? '' }}"
-                                                                    {{ $user->roles == $editor ? 'selected' : '' }}>Editor
-                                                                </option>
-                                                            </select>
-                                                            <div>
-                                                                <small class="small">
-                                                                    @error('roles')
-                                                                        <div class="error">
-                                                                            {{ $message ?? 'Error' }}</div>
-                                                                    @enderror
-                                                                </small>
-                                                            </div>
+                                                            @if (isset($roles))
+                                                                <select class="form-select form-select-lg mb-3"
+                                                                    id="roles" name="roles" style="width:30%;">
+                                                                    @foreach ($roles as $role)
+                                                                        <option value="{{ $role->id }}"
+                                                                            {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                                                                            {{ $role->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <div>
+                                                                    <small class="small">
+                                                                        @error('roles')
+                                                                            <div class="error">
+                                                                                {{ $message ?? 'Error' }}</div>
+                                                                        @enderror
+                                                                    </small>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
 

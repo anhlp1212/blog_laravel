@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepository;
+use App\Repositories\Role\RoleRepository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -11,22 +12,18 @@ use Exception;
 class UserController extends Controller
 {
     protected $userRepo;
-    const ADMIN = 1;
-    const EDITOR = 2;
+    protected $roleRepo;
 
-    public function __construct(UserRepository $userRepo)
+    public function __construct(UserRepository $userRepo, RoleRepository $roleRepo)
     {
         $this->userRepo = $userRepo;
+        $this->roleRepo = $roleRepo;
     }
 
     public function index()
     {
         $users = $this->userRepo->getAllOrderByDesc();
-        return view('admin.users.users', [
-            'users' => $users,
-            'title' => 'Users Management',
-            'admin' => Self::ADMIN,
-        ]);
+        return view('admin.users.users', ['users' => $users, 'title' => 'Users Management']);
     }
 
     public function detail($user_id)
@@ -38,12 +35,16 @@ class UserController extends Controller
         return view('admin.users.detail', ['user' => $user, 'title' => 'User Detail']);
     }
 
-    public function add_user_page()
+    public function addUserPage()
     {
-        return view('admin.users.add_user', ['title' => 'Add User', 'admin' => Self::ADMIN, 'editor' => Self::EDITOR]);
+        $roles = $this->roleRepo->getAll();
+        if (!$roles) {
+            abort(404);
+        }
+        return view('admin.users.add_user', ['title' => 'Add User', 'roles' => $roles]);
     }
 
-    public function add_user(UserRequest $request)
+    public function addUser(UserRequest $request)
     {
         try {
             $data = $request->all();
@@ -51,7 +52,7 @@ class UserController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'roles' => $data['roles']
+                'role_id' => $data['roles']
             ]);
             return redirect()->route('user.users');
         } catch (Exception $e) {
@@ -59,28 +60,27 @@ class UserController extends Controller
         }
     }
 
-    public function edit_user_page($user_id)
+    public function editUserPage($user_id)
     {
         $user = $this->userRepo->find($user_id);
         if (!$user) {
             abort(404);
         }
-        return view('admin.users.edit_user', [
-            'user' => $user,
-            'title' => 'Edit User',
-            'admin' => Self::ADMIN,
-            'editor' => Self::EDITOR
-        ]);
+        $roles = $this->roleRepo->getAll();
+        if (!$roles) {
+            abort(404);
+        }
+        return view('admin.users.edit_user', ['user' => $user, 'roles' => $roles, 'title' => 'Edit User']);
     }
 
-    public function edit_user(UserRequest $request)
+    public function editUser(UserRequest $request)
     {
         try {
             $data = $request->all();
             $dataUpdate = [
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'roles' => $data['roles'],
+                'role_id' => $data['roles'],
             ];
             if ($data['password']) {
                 $dataUpdate['password'] = Hash::make($data['password']);

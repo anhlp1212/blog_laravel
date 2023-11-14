@@ -64,7 +64,7 @@
                                                     </th>
                                                     <th
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                        {{ $user->roles == $admin ? 'Admin' : 'Editor'}}
+                                                        {{ $user->role->name}}
                                                     </th>
                                                     <td class="text-center align-middle">
                                                         @if (Route::has('user.detail'))

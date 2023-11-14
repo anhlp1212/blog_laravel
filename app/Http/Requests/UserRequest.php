@@ -21,14 +21,22 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $isRequired = isset($this->id) ? 'nullable' : 'required';
-        $isUniqueName = isset($this->id) ? "unique:admins,name,$this->id" : 'unique:admins,name';
-        $isUniqueEmail = isset($this->id) ? "unique:admins,email,$this->id,id" : 'unique:admins,email';
-        return [
-            'name' => ['required', 'string', 'max:128', $isUniqueName],
-            'email' => ['required', 'email:rfc,dns', $isUniqueEmail],
+        $arrRules = [
+            'name' => ['required', 'string', 'max:128'],
+            'email' => ['required', 'email:rfc,dns'],
             'roles' => ['required'],
-            'password' => [$isRequired, 'min:8', 'confirmed']
+            'password' => ['min:8', 'confirmed']
         ];
+        if (isset($this->id)) {
+            $arrRules['name'][] = "unique:admins,name,$this->id";
+            $arrRules['email'][] = "unique:admins,email,$this->id,id";
+            $arrRules['password'][] = 'nullable';
+        } else {
+            $arrRules['name'][] = 'unique:admins,name';
+            $arrRules['email'][] = 'unique:admins,email';
+            $arrRules['password'] = 'required';
+        }
+
+        return $arrRules;
     }
 }
