@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        DB::table('roles')->truncate();
         DB::table('roles')->insert([
             [
                 'name' => 'Admin',
@@ -21,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        DB::table('admins')->truncate();
         DB::table('admins')->insert([
             [
                 'name' => 'Admin',
@@ -30,15 +34,23 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        DB::table('users')->truncate();
         User::factory()->times(10)->create();
+
+        DB::table('posts')->truncate();
         Post::factory()->times(20)->create();
+
+        DB::table('tags')->truncate();
         Tag::factory()->times(4)->create();
 
-        for($i = 0; $i < 20; $i++) {
+        DB::table('post_tag')->truncate();
+        for ($i = 0; $i < 20; $i++) {
             \App\Models\PostTag::factory()->create([
                 'post_id' => Post::all()->random()->id,
                 'tag_id' => Tag::all()->random()->id
             ]);
         }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
