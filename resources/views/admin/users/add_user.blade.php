@@ -42,7 +42,7 @@
                                                                     name="name" maxlength="128"
                                                                     placeholder="Add User Name"
                                                                     value="{{ old('name') }}">
-                                                                <div>
+                                                                <div class="box-error-message">
                                                                     <small class="small">
                                                                         @error('name')
                                                                             <div class="error">
@@ -62,7 +62,7 @@
                                                                 <input class="input_fullName" type="email"
                                                                     name="email" placeholder="Add Email"
                                                                     value="{{ old('email') }}">
-                                                                <div>
+                                                                <div class="box-error-message">
                                                                     <small class="small">
                                                                         @error('email')
                                                                             <div class="error">
@@ -78,19 +78,24 @@
                                                     <div class="my-form-control">
                                                         <label class="input-label">Choose a Role</label>
                                                         <div>
-                                                            <select class="form-select form-select-lg mb-3"
-                                                                id="roles" name="roles" style="width:30%;">
-                                                                <option value="{{ $admin ?? '' }}">Admin</option>
-                                                                <option value="{{ $editor ?? '' }}">Editor</option>
-                                                            </select>
-                                                            <div>
-                                                                <small class="small">
-                                                                    @error('roles')
-                                                                        <div class="error">
-                                                                            {{ $message ?? 'Error' }}</div>
-                                                                    @enderror
-                                                                </small>
-                                                            </div>
+                                                            @if (isset($roles))
+                                                                <select class="form-select form-select-lg"
+                                                                    id="roles" name="roles" style="width:30%;">
+                                                                    @foreach ($roles as $role)
+                                                                        <option value="{{ $role->id }}">
+                                                                            {{ $role->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <div class="box-error-message">
+                                                                    <small class="small">
+                                                                        @error('roles')
+                                                                            <div class="error">
+                                                                                {{ $message ?? 'Error' }}</div>
+                                                                        @enderror
+                                                                    </small>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
 
@@ -100,7 +105,7 @@
                                                             <div class="Style__StyleInput">
                                                                 <input class="input_fullName" type="password"
                                                                     name="password" placeholder="Enter Password">
-                                                                <div>
+                                                                <div class="box-error-message">
                                                                     <small class="small">
                                                                         @error('password')
                                                                             <div class="error">

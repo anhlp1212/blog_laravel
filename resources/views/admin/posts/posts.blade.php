@@ -3,6 +3,7 @@
 
 <head>
     @include('admin.layouts.header_post')
+    <script src="{{ mix('js/app.js') }}"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">

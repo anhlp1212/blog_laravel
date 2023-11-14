@@ -24,18 +24,18 @@ class PostController extends Controller
         return view('index', ['posts' => $posts]);
     }
 
-    public function show_posts()
+    public function showPosts()
     {
         $posts = $this->postRepo->getAllOrderByDesc();
         return view('admin.posts.posts', ['posts' => $posts, 'title' => 'Posts Management']);
     }
 
-    public function add_post_page()
+    public function addPostPage()
     {
         return view('admin.posts.add_post', ['title' => 'Add Post']);
     }
 
-    public function add_post(StorePostRequest $request)
+    public function addPost(StorePostRequest $request)
     {
         if ($request->hasFile('image')) {
             $data = $request->all();
@@ -54,7 +54,7 @@ class PostController extends Controller
         return redirect()->route('post.posts');
     }
 
-    public function edit_post_page($post_id)
+    public function editPostPage($post_id)
     {
         $post = $this->postRepo->find($post_id);
         if ($post) {
@@ -64,7 +64,7 @@ class PostController extends Controller
         }
     }
 
-    public function edit_post(StorePostRequest $request)
+    public function editPost(StorePostRequest $request)
     {
         $data = $request->all();
         $dataUpdate = [
@@ -86,7 +86,7 @@ class PostController extends Controller
         return redirect()->route('post.posts');
     }
 
-    public function delete_post($post_id)
+    public function deletePost($post_id)
     {
         try {
             $post = $this->postRepo->delete($post_id);

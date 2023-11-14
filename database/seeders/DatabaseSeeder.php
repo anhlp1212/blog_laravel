@@ -12,18 +12,21 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::table('roles')->insert([
+            [
+                'name' => 'Admin',
+            ],
+            [
+                'name' => 'Editor',
+            ]
+        ]);
 
         DB::table('admins')->insert([
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('admin123'),
+                'role_id' => 1
             ]
         ]);
 
@@ -31,7 +34,7 @@ class DatabaseSeeder extends Seeder
         Post::factory()->times(20)->create();
         Tag::factory()->times(4)->create();
 
-        for($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             \App\Models\PostTag::factory()->create([
                 'post_id' => Post::all()->random()->id,
                 'tag_id' => Tag::all()->random()->id

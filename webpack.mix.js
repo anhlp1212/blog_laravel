@@ -24,4 +24,8 @@ mix.styles([
     'resources/css/Post/style.css',
 ], 'public/css/Post/style.css');
 
+mix.styles([
+    'resources/css/User/style.css',
+], 'public/css/User/style.css');
+
 mix.js('resources/js/app.js', 'public/js').version();

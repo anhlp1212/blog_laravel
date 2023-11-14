@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepository;
+use App\Repositories\Role\RoleRepository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -11,12 +12,12 @@ use Exception;
 class UserController extends Controller
 {
     protected $userRepo;
-    const ADMIN = 1;
-    const EDITOR = 2;
+    protected $roleRepo;
 
-    public function __construct(UserRepository $userRepo)
+    public function __construct(UserRepository $userRepo, RoleRepository $roleRepo)
     {
         $this->userRepo = $userRepo;
+        $this->roleRepo = $roleRepo;
     }
 
     public function index()
@@ -34,12 +35,16 @@ class UserController extends Controller
         return view('admin.users.detail', ['user' => $user, 'title' => 'User Detail']);
     }
 
-    public function add_user_page()
+    public function addUserPage()
     {
-        return view('admin.users.add_user', ['title' => 'Add User', 'admin' => Self::ADMIN, 'editor' => Self::EDITOR]);
+        $roles = $this->roleRepo->getAll();
+        if (!$roles) {
+            abort(404);
+        }
+        return view('admin.users.add_user', ['title' => 'Add User', 'roles' => $roles]);
     }
 
-    public function add_user(UserRequest $request)
+    public function addUser(UserRequest $request)
     {
         try {
             $data = $request->all();
@@ -47,7 +52,7 @@ class UserController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'roles' => $data['roles']
+                'role_id' => $data['roles']
             ]);
             return redirect()->route('user.users');
         } catch (Exception $e) {
