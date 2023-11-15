@@ -33,3 +33,18 @@ mix.styles([
 ], 'public/css/app.css');
 
 mix.js('resources/js/app.js', 'public/js').version();
+
+mix
+    .setPublicPath("public")
+    .js("resources/js/post/post_add_edit.js", "public/js")
+    .version();
+
+mix
+    .setPublicPath("public")
+    .js("resources/js/post/post_delete.js", "public/js")
+    .version();
+
+mix
+    .setPublicPath("public")
+    .js("resources/js/user/user_delete.js", "public/js")
+    .version();

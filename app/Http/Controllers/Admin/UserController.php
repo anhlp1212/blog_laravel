@@ -8,6 +8,7 @@ use App\Repositories\Role\RoleRepository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -92,6 +93,26 @@ class UserController extends Controller
             return redirect()->route('user.users');
         } catch (Exception $e) {
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteUser($user_id)
+    {
+        try {
+            $user = $this->userRepo->delete($user_id);
+            if ($user) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Deleted successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'false',
+                    'message' => 'Error'
+                ], 200);
+            }
+        } catch (Exception $e) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
         }
     }
 }

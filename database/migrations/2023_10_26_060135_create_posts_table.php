@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('admin_id');
             $table->string('title');
-            $table->longText('excerpt')->nullable(false);
+            $table->longText('excerpt')->nullable(true);
             $table->longText('description');
             $table->longText('image');
-            $table->integer('min_to_read');
+            $table->integer('min_to_read')->nullable(true);
             $table->foreign('admin_id')
                 ->references('id')
                 ->on('admins')

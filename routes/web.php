@@ -49,6 +49,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{user_id}', [UserController::class, 'editUserPage'])->name('edit_user_page');
         Route::post('/edit_user', [UserController::class, 'editUser'])->name('edit_user');
 
+        Route::delete('/delete_user/{user_id}', [UserController::class, 'deleteUser'])->name('delete_user');
+
         Route::get('/{user_id}', [UserController::class, 'detail'])->name('detail');
     });
 });

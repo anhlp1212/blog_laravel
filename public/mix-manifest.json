@@ -1,5 +1,8 @@
 {
-    "/js/app.js": "/js/app.js?id=9c63d1e3eb556f37cec34528cb3beaac",
+    "/js/app.js": "/js/app.js?id=7790008f34a8b586c84d9146c9c21837",
+    "/js/post_add_edit.js": "/js/post_add_edit.js?id=ff9a07ebda0f95383d55aa67e9ad5f90",
+    "/js/post_delete.js": "/js/post_delete.js?id=e15794de402bc9bba5063c9ea941d0f3",
+    "/js/user_delete.js": "/js/user_delete.js?id=ef6cebf23d42bc1d4b904d4c96494965",
     "/css/material-dashboard.css": "/css/material-dashboard.css?id=66985f69ad71c04995eff6217d7eff4a",
     "/css/post/style.css": "/css/post/style.css?id=d55637e0cf39cb71e6ed1cce72c00c0f",
     "/css/user/style.css": "/css/user/style.css?id=0e31dc12e6245bb5425359203c10579e",
