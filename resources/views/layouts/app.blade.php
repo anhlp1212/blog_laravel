@@ -8,12 +8,12 @@
         Blogs
     </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=Miriam+Libre:400,700|Merriweather" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-neutral">
-    <header>
+    <header class="py-5 mb-10 mx-auto w-4/5">
         @include('layouts.nav')
     </header>
 

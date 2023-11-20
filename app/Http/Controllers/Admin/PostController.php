@@ -24,6 +24,15 @@ class PostController extends Controller
         return view('index', ['posts' => $posts]);
     }
 
+    public function showPost($post_id){
+        $post = $this->postRepo->find($post_id);
+        if ($post) {
+            return view('post', ['post' => $post, 'title' => $post->title]);
+        } else {
+            return abort(404);
+        }
+    }
+
     public function showPosts()
     {
         $posts = $this->postRepo->getAllOrderByDesc();
