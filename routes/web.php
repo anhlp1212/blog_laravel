@@ -30,18 +30,22 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
-        Route::get('/', [PostController::class, 'show_posts'])->name('posts');
-        Route::get('/add', [PostController::class, 'add_post_page'])->name('add_post_page');
-        Route::post('/add', [PostController::class, 'add_post'])->name('add_post');
+        Route::get('/', [PostController::class, 'showPosts'])->name('posts');
+        Route::get('/add', [PostController::class, 'addPostPage'])->name('add_post_page');
+        Route::post('/add', [PostController::class, 'addPost'])->name('add_post');
 
-        Route::get('/edit/{post_id}', [PostController::class, 'edit_post_page'])->name('edit_post_page');
-        Route::post('/edit_post', [PostController::class, 'edit_post'])->name('edit_post');
+        Route::get('/edit/{post_id}', [PostController::class, 'editPostPage'])->name('edit_post_page');
+        Route::post('/edit_post', [PostController::class, 'editPost'])->name('edit_post');
 
-        Route::delete('/delete_post/{post_id}', [PostController::class, 'delete_post'])->name('delete_post');
+        Route::delete('/delete_post/{post_id}', [PostController::class, 'deletePost'])->name('delete_post');
     });
 
     Route::group(['prefix' => 'users', 'as' => 'user.'], function () {
         Route::get('/', [UserController::class, 'index'])->name('users');
+
+        Route::get('/add', [UserController::class, 'addUserPage'])->name('add_user_page');
+        Route::post('/add', [UserController::class, 'addUser'])->name('add_user');
+
         Route::get('/{user_id}', [UserController::class, 'detail'])->name('detail');
     });
 });

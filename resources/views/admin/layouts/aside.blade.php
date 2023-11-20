@@ -36,7 +36,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Edit profile</a>
+                        <a href="#" class="nav-link">New users</a>
                     </li>
                 </ul>
             </li>

@@ -15,7 +15,7 @@ class Admin extends Authenticatable
     protected $guarded = 'admin';
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id'
     ];
 
     protected $hidden = [
@@ -24,6 +24,11 @@ class Admin extends Authenticatable
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsTo(Post::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }
