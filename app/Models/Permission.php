@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Permission extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -14,13 +14,8 @@ class Role extends Model
         'name',
     ];
 
-    public function admins()
+    public function roles()
     {
-        return $this->hasMany(Admin::class);
-    }
-
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class);
+        return $this->belongsToMany(Role::class, 'permission_role');
     }
 }

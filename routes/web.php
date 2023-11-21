@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     });
 
-    Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
+    Route::group(['prefix' => 'posts', 'as' => 'post.', 'middleware' => ['auth:admin','role:editor']], function () {
         Route::get('/', [PostController::class, 'showPosts'])->name('posts');
         Route::get('/add', [PostController::class, 'addPostPage'])->name('add_post_page');
         Route::post('/add', [PostController::class, 'addPost'])->name('add_post');
@@ -40,7 +40,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete_post/{post_id}', [PostController::class, 'deletePost'])->name('delete_post');
     });
 
-    Route::group(['prefix' => 'users', 'as' => 'user.'], function () {
+    Route::group(['prefix' => 'users', 'as' => 'user.', 'middleware' => ['auth:admin', 'role:admin']], function () {
         Route::get('/', [UserController::class, 'index'])->name('users');
 
         Route::get('/add', [UserController::class, 'addUserPage'])->name('add_user_page');

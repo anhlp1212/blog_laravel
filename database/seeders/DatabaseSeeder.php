@@ -14,14 +14,39 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
+        DB::table('permissions')->truncate();
+        DB::table('permissions')->insert([
+            ['name' => 'add_post'],
+            ['name' => 'edit_post'],
+            ['name' => 'delete_post'],
+            ['name' => 'detail_user'],
+            ['name' => 'add_user'],
+            ['name' => 'edit_user'],
+            ['name' => 'delete_user'],
+        ]);
+
         DB::table('roles')->truncate();
         DB::table('roles')->insert([
             [
-                'name' => 'Admin',
+                'name' => 'admin',
             ],
             [
-                'name' => 'Editor',
+                'name' => 'editor',
             ]
+        ]);
+
+        DB::table('permission_role')->truncate();
+        DB::table('permission_role')->insert([
+            ['permission_id' => 1, 'role_id' => 1], // admin: add_post
+            ['permission_id' => 2, 'role_id' => 1], // admin: edit_post
+            ['permission_id' => 3, 'role_id' => 1], // admin: delete_post
+            ['permission_id' => 4, 'role_id' => 1], // admin: detail_user
+            ['permission_id' => 5, 'role_id' => 1], // admin: add_user
+            ['permission_id' => 6, 'role_id' => 1], // admin: edit_user
+            ['permission_id' => 7, 'role_id' => 1], // admin: delete_user
+            ['permission_id' => 1, 'role_id' => 2], // editor: add_post
+            ['permission_id' => 2, 'role_id' => 2], // editor: edit_post
+            ['permission_id' => 3, 'role_id' => 2], // editor: delete_post
         ]);
 
         DB::table('admins')->truncate();
@@ -31,6 +56,12 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('admin123'),
                 'role_id' => 1
+            ],
+            [
+                'name' => 'Editor',
+                'email' => 'editor@gmail.com',
+                'password' => bcrypt('editor123'),
+                'role_id' => 2
             ]
         ]);
 
