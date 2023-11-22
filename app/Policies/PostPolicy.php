@@ -31,9 +31,8 @@ class PostPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(Admin $user, Post $post): bool
+    public function delete(Admin $user): bool
     {
-        //
-        return false;
+        return ($user && $user->hasPermission('delete_post'));
     }
 }

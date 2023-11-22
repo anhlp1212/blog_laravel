@@ -67,9 +67,6 @@ class PostController extends Controller
 
     public function editPost(StorePostRequest $request, Post $post)
     {
-        if ($request->user()->cannot('update', $post)) {
-            abort(403);
-        }
         $data = $request->all();
         $dataUpdate = [
             'admin_id' => auth()->guard('admin')->user()->id,

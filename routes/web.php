@@ -29,12 +29,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     });
 
-    Route::group(['prefix' => 'posts', 'as' => 'post.', 'middleware' => ['auth:admin','role:editor']], function () {
+    Route::group(['prefix' => 'posts', 'as' => 'post.', 'middleware' => ['auth:admin',"role:admin,editor"]], function () {
         Route::get('/', [PostController::class, 'showPosts'])->name('posts');
         Route::get('/add', [PostController::class, 'addPostPage'])->name('add_post_page');
         Route::post('/add', [PostController::class, 'addPost'])->name('add_post');
 
-        Route::get('/edit/{post_id}', [PostController::class, 'editPostPage'])->name('edit_post_page');
+        Route::get('/edit/{post_id}', [PostController::class, 'editPostPage'])->name('edit_post_page')
+        ->middleware('can:update,App\Models\Post');
         Route::post('/edit_post', [PostController::class, 'editPost'])->name('edit_post');
 
         Route::delete('/delete_post/{post_id}', [PostController::class, 'deletePost'])->name('delete_post');
