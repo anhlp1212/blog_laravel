@@ -34,7 +34,7 @@ class UserRequest extends FormRequest
         } else {
             $arrRules['name'][] = 'unique:admins,name';
             $arrRules['email'][] = 'unique:admins,email';
-            $arrRules['password'] = 'required';
+            $arrRules['password'][] = 'required';
         }
 
         return $arrRules;
