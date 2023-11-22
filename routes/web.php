@@ -46,6 +46,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/add', [UserController::class, 'addUserPage'])->name('add_user_page');
         Route::post('/add', [UserController::class, 'addUser'])->name('add_user');
 
+        Route::get('/edit/{user_id}', [UserController::class, 'editUserPage'])->name('edit_user_page');
+        Route::post('/edit_user', [UserController::class, 'editUser'])->name('edit_user');
+
         Route::get('/{user_id}', [UserController::class, 'detail'])->name('detail');
     });
 });

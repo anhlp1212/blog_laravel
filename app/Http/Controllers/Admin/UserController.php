@@ -59,4 +59,39 @@ class UserController extends Controller
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
     }
+
+    public function editUserPage($user_id)
+    {
+        $user = $this->userRepo->find($user_id);
+        if (!$user) {
+            abort(404);
+        }
+        $roles = $this->roleRepo->getAll();
+        if (!$roles) {
+            abort(404);
+        }
+        return view('admin.users.edit_user', ['user' => $user, 'roles' => $roles, 'title' => 'Edit User']);
+    }
+
+    public function editUser(UserRequest $request)
+    {
+        try {
+            $data = $request->all();
+            $dataUpdate = [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'role_id' => $data['roles'],
+            ];
+            if ($data['password']) {
+                $dataUpdate['password'] = Hash::make($data['password']);
+            }
+            $this->userRepo->update(
+                $data['id'],
+                $dataUpdate
+            );
+            return redirect()->route('user.users');
+        } catch (Exception $e) {
+            return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
+        }
+    }
 }

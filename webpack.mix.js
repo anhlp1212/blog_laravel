@@ -28,4 +28,8 @@ mix.styles([
     'resources/css/user/style.css',
 ], 'public/css/user/style.css');
 
+mix.styles([
+    'resources/css/app.css',
+], 'public/css/app.css');
+
 mix.js('resources/js/app.js', 'public/js').version();

@@ -67,9 +67,13 @@
                                                         {{ $user->role->name }}
                                                     </th>
                                                     <td class="text-center align-middle">
-                                                        <a class="btn btn-success btn-sm"
-                                                            href="{{ route('user.detail', $user->id) }}">Show</a>
-                                                        <a class="btn btn-info btn-sm" href="#">Edit</a>
+                                                        @if (Route::has('user.detail'))
+                                                            <a class="btn btn-success btn-sm"
+                                                                href="{{ route('user.detail', $user->id) }}">Show</a>
+                                                        @endif
+                                                        @if (Route::has('user.edit_user_page'))
+                                                            <a class="btn btn-info btn-sm" href="{{ route('user.edit_user_page', $user->id) }}">Edit</a>
+                                                        @endif
                                                         <a class="btn btn-primary btn-sm" href="#">Delete</a>
                                                     </td>
                                                 </tr>

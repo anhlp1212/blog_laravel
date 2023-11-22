@@ -6,8 +6,10 @@
 </title>
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-<!-- CSS Files -->
+
+<!-- CSS Common File -->
 <link id="pagestyle" href="{{ mix('/css/material-dashboard.css') }}" rel="stylesheet" />
-<!--CSS-->
-<link href="{{ mix('/css/post/style.css') }}" rel="stylesheet" />
-<link href="{{ mix('/css/user/style.css') }}" rel="stylesheet" />
+<link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
+
+<!--CSS for each Page-->
+@yield('assets')

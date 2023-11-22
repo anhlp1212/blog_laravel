@@ -2,8 +2,12 @@
 <html lang="en">
 
 <head>
-    @include('admin.layouts.header_post')
+    @extends('admin.layouts.header_post')
 
+    @section('assets')
+        <link href="{{ mix('/css/post/style.css') }}" rel="stylesheet" />
+    @endsection
+    
     <script src="{{ mix('js/app.js') }}"></script>
 </head>
 
