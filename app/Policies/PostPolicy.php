@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\Post;
 use App\Models\Admin;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class PostPolicy
 {
@@ -23,9 +22,12 @@ class PostPolicy
      * Determine whether the user can update the model.
      */
 
-    public function update(Admin $user): bool
+    public function update(Admin $user, Post $post): bool
     {
-        return ($user && $user->hasPermission('edit_post'));
+        return (
+            ($user->hasRole('admin')) ||
+            ($user->id == $post->admin_id && $user->hasPermission('edit_post'))
+        );
     }
 
     /**

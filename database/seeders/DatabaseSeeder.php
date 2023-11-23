@@ -46,7 +46,6 @@ class DatabaseSeeder extends Seeder
             ['permission_id' => 7, 'role_id' => 1], // admin: delete_user
             ['permission_id' => 1, 'role_id' => 2], // editor: add_post
             ['permission_id' => 2, 'role_id' => 2], // editor: edit_post
-            ['permission_id' => 3, 'role_id' => 2], // editor: delete_post
         ]);
 
         DB::table('admins')->truncate();
@@ -60,6 +59,12 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Editor',
                 'email' => 'editor@gmail.com',
+                'password' => bcrypt('editor123'),
+                'role_id' => 2
+            ],
+            [
+                'name' => 'Editor1',
+                'email' => 'editor1@gmail.com',
                 'password' => bcrypt('editor123'),
                 'role_id' => 2
             ]
