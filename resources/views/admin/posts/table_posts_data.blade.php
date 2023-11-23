@@ -21,7 +21,7 @@
                     </a>
                 @endif
                 @if (Route::has('post.delete_post'))
-                    <a class="btn btn-info btn-sm delete_post" id="{{ $post->id }}" data-toggle="tooltip"
+                    <a class="btn btn-info btn-sm delete_btn" id="{{ $post->id }}" data-toggle="tooltip"
                         data-post-id="{{ $post->id }}" data-original-title="Delete post">
                         Delete
                     </a>
