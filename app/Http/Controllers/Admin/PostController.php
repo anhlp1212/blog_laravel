@@ -58,7 +58,7 @@ class PostController extends Controller
     public function editPostPage($post_id)
     {
         $post = $this->postRepo->find($post_id);
-        if ($post) {
+        if ($post && auth()->guard('admin')->user()->can('update', $post)) {
             return view('admin.posts.edit_post', ['post' => $post, 'title' => 'Edit Post']);
         } else {
             return abort(404);

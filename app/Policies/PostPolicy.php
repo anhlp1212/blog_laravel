@@ -11,23 +11,12 @@ class PostPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can create models.
-     */
-    public function create(Admin $user): bool
-    {
-        return ($user &&  $user->hasPermission('add_post'));
-    }
-
-    /**
      * Determine whether the user can update the model.
      */
 
     public function update(Admin $user, Post $post): bool
     {
-        return (
-            ($user->hasRole('admin')) ||
-            ($user->id == $post->admin_id && $user->hasPermission('edit_post'))
-        );
+        return ($user->hasRole('admin') || $user->id == $post->admin_id);
     }
 
     /**
@@ -35,6 +24,6 @@ class PostPolicy
      */
     public function delete(Admin $user): bool
     {
-        return ($user && $user->hasPermission('delete_post'));
+        return ($user && $user->hasRole('admin'));
     }
 }

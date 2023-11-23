@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\HasPermissions;
+use App\Traits\HasRole;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable, HasPermissions;
+    use HasFactory, Notifiable, HasRole;
 
     protected $table = 'admins';
 

@@ -22,7 +22,7 @@
                     </a>
                 @endif
             </li>
-            @if (auth()->guard('admin')->user()->hasPermission('detail_user'))
+            @if (auth()->guard('admin')->user()->hasRole('admin'))
                 <li class="nav-item">
                     @if (Route::has('user.users'))
                         <a class="nav-link text-white {{ request()->routeIs('user.*') ? 'active bg-gradient-primary' : '' }}"
