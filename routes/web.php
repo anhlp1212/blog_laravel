@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\UserController;
 
 //User
 Route::get('/', [PostController::class, 'index'])->name('index');
+Route::get('/post/{post_id}', [PostController::class, 'showPost'])->name('showPost');
 
 //Admin
 Route::prefix('admin')->group(function () {
