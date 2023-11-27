@@ -6,7 +6,7 @@ window.callAjaxDelete = function (url_delete) {
     });
 
     $("#modal-btn-yes").on("click", function () {
-        if (typeof item_id === 'undefined' || item_id === null) {
+        if (typeof item_id === undefined || item_id === null) {
             console.error("Error deleting post: Not defined post");
         }
         else {
@@ -45,3 +45,5 @@ $().ready(function () {
         $("#mi-modal").modal('hide');
     });
 })
+
+module.exports = callAjaxDelete
