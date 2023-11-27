@@ -5,6 +5,12 @@ mix.options({
         'Promise'
     ]
 });
+
+mix.webpackConfig({
+    stats: {
+        children: true,
+    },
+});
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -16,20 +22,26 @@ mix.options({
  |
  */
 
-mix.styles([
-    'resources/css/material-dashboard.css',
-], 'public/css/material-dashboard.css');
+// Common
+mix
+    .setPublicPath('public')
+    .js('resources/js/app.js', 'public/js')
+    .js('resources/js/delete.js', 'public/js')
+    .styles('resources/css/app.css', 'public/css/app.css')
+    .styles('resources/css/material-dashboard.css', 'public/css/material-dashboard.css')
+    .version();
 
-mix.styles([
-    'resources/css/post/style.css',
-], 'public/css/post/style.css');
+// Admin - Manage Post
+mix
+    .setPublicPath('public')
+    .js("resources/js/post/post_add_edit.js", "public/js")
+    .js("resources/js/post/post_delete.js", "public/js")
+    .styles('resources/css/post/style.css', 'public/css/post/style.css')
+    .version();
 
-mix.styles([
-    'resources/css/user/style.css',
-], 'public/css/user/style.css');
-
-mix.styles([
-    'resources/css/app.css',
-], 'public/css/app.css');
-
-mix.js('resources/js/app.js', 'public/js').version();
+// Admin - Manage User
+mix
+    .setPublicPath('public')
+    .js("resources/js/user/user_delete.js", "public/js")
+    .styles('resources/css/user/style.css', 'public/css/user/style.css')
+    .version();

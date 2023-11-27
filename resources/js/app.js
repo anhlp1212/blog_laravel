@@ -8,16 +8,11 @@ import 'tinymce/models/dom/model';
 
 // .. After imports init TinyMCE ..
 window.addEventListener('DOMContentLoaded', () => {
-    tinymce.init({
-        selector: 'textarea',
-
-        /* TinyMCE configuration options */
-        skin: false,
-        content_css: false,
-        plugins: 'code table lists',
-        toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
     });
-
 });
 
 import Popper from 'popper.js';

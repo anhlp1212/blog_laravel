@@ -79,7 +79,6 @@
             </div>
         </div>
     </main>
-    @include('admin.layouts.footer_post')
 </body>
 
 </html>
