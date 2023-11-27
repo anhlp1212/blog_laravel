@@ -8,8 +8,7 @@ window.callAjaxDelete = function (url_delete) {
     $("#modal-btn-yes").on("click", function () {
         if (typeof item_id === undefined || item_id === null) {
             console.error("Error deleting post: Not defined post");
-        }
-        else {
+        } else {
             $.ajax({
                 url: url_delete + item_id,
                 method: "DELETE",
