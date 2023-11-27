@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use App\Http\Requests\StorePostRequest;
 use Exception;
 use Illuminate\Support\Facades\Log;
-use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -65,7 +64,7 @@ class PostController extends Controller
         }
     }
 
-    public function editPost(StorePostRequest $request, Post $post)
+    public function editPost(StorePostRequest $request)
     {
         $data = $request->all();
         $dataUpdate = [
