@@ -54,5 +54,5 @@
 @endsection
 
 @section('script')
-    <script src="{{ mix('/js/post_delete.js') }}"></script>
+    <script type="module" src="{{ mix('/js/post_delete.js') }}"></script>
 @endsection
