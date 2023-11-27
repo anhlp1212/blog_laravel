@@ -60,7 +60,7 @@
                                                             href="{{ route('user.edit_user_page', $user->id) }}">Edit</a>
                                                     @endif
                                                     @if (Route::has('user.delete_user'))
-                                                        <a class="btn btn-primary btn-sm delete_user"
+                                                        <a class="btn btn-primary btn-sm delete_btn"
                                                             id="{{ $user->id }}" data-toggle="tooltip"
                                                             href="#">Delete</a>
                                                     @endif
