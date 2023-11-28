@@ -12,17 +12,19 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Post;
 use Mail;
 use App\Mail\SendDemoMail;
-
+use App\Repositories\SendMail\SendMailRepository;
 
 class PostController extends Controller
 {
     protected $postRepo;
     protected $userRepo;
+    protected $sendMailRepo;
 
-    public function __construct(PostRepository $postRepo, UserRepository $userRepo)
+    public function __construct(PostRepository $postRepo, UserRepository $userRepo, SendMailRepository $sendMailRepo)
     {
         $this->postRepo = $postRepo;
         $this->userRepo = $userRepo;
+        $this->sendMailRepo = $sendMailRepo;
     }
 
     public function index()
@@ -31,7 +33,8 @@ class PostController extends Controller
         return view('index', ['posts' => $posts]);
     }
 
-    public function showPost($post_id){
+    public function showPost($post_id)
+    {
         $post = $this->postRepo->find($post_id);
         if ($post) {
             return view('post_detail', ['post' => $post, 'title' => $post->title]);
@@ -53,21 +56,35 @@ class PostController extends Controller
 
     public function addPost(StorePostRequest $request)
     {
-        if ($request->hasFile('image')) {
-            $data = $request->all();
-            // Save file on public/images
-            $imageName = Carbon::now()->timestamp . '_' . $request->file('image')->getClientOriginalName();
-            $request->image->move(public_path('images'), $imageName);
-            // Insert data on table posts
-            $urlImage = 'images/' . $imageName;
-            $this->postRepo->create([
-                'admin_id' => auth()->guard('admin')->user()->id,
-                'title' => $data['title'],
-                'description' => $data['description'],
-                'image' => $urlImage
-            ]);
+        try {
+            if ($request->hasFile('image')) {
+                $data = $request->all();
+                // Save file on public/images
+                $imageName = Carbon::now()->timestamp . '_' . $request->file('image')->getClientOriginalName();
+                $request->image->move(public_path('images'), $imageName);
+                // Insert data on table posts
+                $dataInsert = [
+                    'admin_id' => auth()->guard('admin')->user()->id,
+                    'title' => $data['title'],
+                    'description' => $data['description'],
+                    'image' => 'images/' . $imageName
+                ];
+                if ($this->postRepo->create($dataInsert)) {
+                    // Extra 1: Khi đăng ký post thì luu vào table send_mail email của admin và set key send = 0
+                    $users = $this->userRepo->getAll();
+                    foreach ($users as $user) {
+                        if ($user->hasRole('admin')) {
+                            $this->sendMailRepo->create(['admin_email' => $user->email]);
+                        }
+                    }
+                    return redirect()->route('post.posts');
+                    // Extra 1: when run batch send mail -> send mail to admin
+                    // sail artisan app:send-emails
+                }
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
-        return redirect()->route('post.posts');
     }
 
     public function editPostPage($post_id)
@@ -102,7 +119,7 @@ class PostController extends Controller
                 // Send mail to Admin
                 $users = $this->userRepo->getAll();
                 foreach ($users as $user) {
-                    if ($user->hasRole('admin')){
+                    if ($user->hasRole('admin')) {
                         Mail::to($user->email)->send(new SendDemoMail($post));
                     }
                 }

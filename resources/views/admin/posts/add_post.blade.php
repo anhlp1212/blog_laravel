@@ -18,6 +18,9 @@
                             <div class="info-row">
                                 <div class="info-left-addsp">
                                     <div class="Style__AccountInfo">
+                                        @if (session('warning'))
+                                            <div class="alert alert-warning"> {{ session('warning') }} </div>
+                                        @endif
                                         @if (Route::has('post.add_post'))
                                             <form class="form-add-sp" id="form-add-sp" method="post"
                                                 action="{{ route('post.add_post') }}" enctype="multipart/form-data">
