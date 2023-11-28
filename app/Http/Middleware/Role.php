@@ -12,12 +12,17 @@ class Role
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
 
-    public function handle($request, Closure $next, ...$roles)
+    public function handle($request, Closure $next)
     {
-        foreach ($roles as $role) {
-            if ($request->user()->hasRole($role)) {
-                return $next($request);
-            }
+        $adminAllowRoute = ['user.*', 'post.*'];
+        $editorAllowRoute = ['post.*'];
+
+        if (request()->routeIs($adminAllowRoute) && auth()->guard('admin')->user()->hasRole('admin')) {
+            return $next($request);
+        }
+
+        if (request()->routeIs($editorAllowRoute) && auth()->guard('admin')->user()->hasRole('editor')) {
+            return $next($request);
         }
 
         return abort('403', __("You don't have permission to perform this operation"));
