@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
         DB::table('roles')->truncate();
         DB::table('roles')->insert([
             [
-                'name' => 'Admin',
+                'name' => 'admin',
             ],
             [
-                'name' => 'Editor',
+                'name' => 'editor',
             ]
         ]);
 
@@ -31,6 +31,18 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('admin123'),
                 'role_id' => 1
+            ],
+            [
+                'name' => 'Editor',
+                'email' => 'editor@gmail.com',
+                'password' => bcrypt('editor123'),
+                'role_id' => 2
+            ],
+            [
+                'name' => 'Editor1',
+                'email' => 'editor1@gmail.com',
+                'password' => bcrypt('editor123'),
+                'role_id' => 2
             ]
         ]);
 
