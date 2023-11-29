@@ -71,17 +71,17 @@ class PostController extends Controller
                 ];
                 if ($this->postRepo->create($dataInsert)) {
                     // Extra 1: Khi đăng ký post thì luu vào table send_mail email của admin và set key send = 0
-                    $users = $this->userRepo->getAll();
+                    $users = $this->userRepo->getUserRoleAdmin();
                     foreach ($users as $user) {
-                        if ($user->hasRole('admin')) {
-                            $this->sendMailRepo->create(['admin_email' => $user->email]);
-                        }
+                        $this->sendMailRepo->create(['admin_email' => $user->email]);
                     }
                     return redirect()->route('post.posts');
                     // Extra 1: when run batch send mail -> send mail to admin
                     // sail artisan app:send-emails
                 }
+                return redirect()->back()->with('warning', "Unable to process request.");
             }
+            return redirect()->back()->with('warning', "Unable to process request. Error: Don't have file image!");
         } catch (Exception $e) {
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
@@ -125,6 +125,7 @@ class PostController extends Controller
                 }
                 return redirect()->route('post.posts');
             }
+            return redirect()->back()->with('warning', "Unable to process request.");
         } catch (Exception $e) {
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }

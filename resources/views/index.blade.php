@@ -11,8 +11,8 @@
         @endif
 
         <div class="uppercase flex items-center justify-center flex-1 py-5 font-sans">
-            <a href="#" rel="next"
-                class="block no-underline text-light hover:text-black px-5">Check More Articles</a>
+            <a href="#" rel="next" class="block no-underline text-light hover:text-black px-5">Check More
+                Articles</a>
         </div>
     </div>
 @endsection

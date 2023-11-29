@@ -1,5 +1,5 @@
 @component('mail::message')
-    This post has been updated.
+    The post has been added.
     @component('mail::panel')
         Thanks, {{ config('app.name') }}
     @endcomponent
