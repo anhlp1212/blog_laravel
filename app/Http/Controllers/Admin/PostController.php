@@ -117,11 +117,9 @@ class PostController extends Controller
                 $post = $this->postRepo->find($data['id']);
 
                 // Send mail to Admin
-                $users = $this->userRepo->getAll();
+                $users = $this->userRepo->getUserRoleAdmin();
                 foreach ($users as $user) {
-                    if ($user->hasRole('admin')) {
-                        Mail::to($user->email)->send(new SendDemoMail($post));
-                    }
+                    Mail::to($user->email)->send(new SendDemoMail($post));
                 }
                 return redirect()->route('post.posts');
             }
