@@ -26,4 +26,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             ->where('role_id', '=', 1)
             ->get();
     }
+    
+    public function getUsersForTable(){
+        return $this->model
+            ->select('admins.id','admins.name','email','roles.name as role_name')
+            ->join('roles', 'roles.id', '=', 'admins.role_id')
+            ->get();
+    }
 }
