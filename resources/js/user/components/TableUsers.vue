@@ -8,15 +8,12 @@
             </tr>
         </thead>
         <tbody class="table-tbody-sp">
-            <!-- @if (isset($users)) -->
             <tr v-for="user in users">
                 <th v-for="item in user" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                     {{ item }}
                 </th>
                 <th class="text-center align-middle">
-                    <!-- @if (Route::has('user.detail')) -->
-                    <a class="btn btn-success btn-sm" href="">Show</a>
-                    <!-- @endif -->
+                    <a v-if="checkUrlShow" class="btn btn-success btn-sm" :href="url_show">Show</a>
                     <!-- @if (Route::has('user.edit_user_page')) -->
                     <a class="btn btn-info btn-sm" href="#">Edit</a>
                     <!-- @endif -->
@@ -26,7 +23,6 @@
                     <!-- @endif -->
                 </th>
             </tr>
-            <!-- @endif -->
         </tbody>
     </table>
 </template>
@@ -38,23 +34,17 @@ export default {
             theads: ['ID', 'Name', 'Email', 'Roles'],
             users: [],
             errors: [],
-            data: []
+            url_show: "/admin/users/"
         }
     },
-    props: {
-    },
-    mounted() {
-        console.log(this.users);
-        console.log(this.data);
-    },
+    props: ['check-url-show'],
     created() {
         this.axios.get('/api/admin/users')
             .then(response => {
-                console.log(response.data)
-                this.users = response.data
+                this.users = response.data;
             })
             .catch(e => {
-                this.errors.push(e)
+                this.errors.push(e);
             })
     }
 }

@@ -19,7 +19,9 @@
                 <div class="card my-4">
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table-users data = "{{ route('user.add_user_page') }}" ></table-users>
+                            <table-users 
+                                check-url-show="{{Route::has('user.detail')}}" 
+                            ></table-users>
                         </div>
                     </div>
                 </div>
