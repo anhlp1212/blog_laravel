@@ -21,6 +21,7 @@
 
 <script>
 export default {
+    name: "ConfirmPopup",
     data() {
         return {
             titleConfirm: 'Do you want to delete this user?',
@@ -48,7 +49,11 @@ export default {
                     const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-error';
                     $("#liveToast").addClass(toastClass);
                     this.showToast();
-                    setTimeout(() => { window.location.href = this.urlUsers; }, this.timeDelay)
+                    if (typeof this.urlUsers === "undefined" || this.urlUsers === null) {
+                        document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
+                    } else {
+                        setTimeout(() => { window.location.href = this.urlUsers; }, this.timeDelay)
+                    }
                 })
                 .catch(error => {
                     console.error(error);

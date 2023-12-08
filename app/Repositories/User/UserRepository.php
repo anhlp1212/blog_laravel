@@ -31,6 +31,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $this->model
             ->select('admins.id','admins.name','email','roles.name as role_name')
             ->join('roles', 'roles.id', '=', 'admins.role_id')
+            ->orderByDesc('id')
             ->get();
     }
 }
