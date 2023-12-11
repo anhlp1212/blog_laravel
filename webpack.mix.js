@@ -45,3 +45,9 @@ mix
     .js("resources/js/user/user_delete.js", "public/js")
     .styles('resources/css/user/style.css', 'public/css/user/style.css')
     .version();
+
+
+// Vue JS
+mix
+    .js("resources/js/user/main.js", "public/user/js")
+    .vue();

@@ -36,9 +36,13 @@
         <!-- Navbar -->
         @include('admin.layouts.nav_bar')
 
-        @yield('content')
+        <div id="app">
+            @yield('content')
+        </div>
 
     </main>
+    <!-- JS for each Page -->
+    @yield('script-vue')
 </body>
 
 </html>
