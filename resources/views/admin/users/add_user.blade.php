@@ -4,8 +4,8 @@
     <link href="{{ mix('/css/user/style.css') }}" rel="stylesheet" />
 @endsection
 
-@section('script')
-    <script src="{{ mix('user/js/main.js') }}" defer></script>
+@section('script-vue')
+    <script src="{{ mix('user/js/main.js') }}"></script>
 @endsection
 
 @section('content')
@@ -19,7 +19,6 @@
                         @endif
                         @if (Route::has('user.add_user'))
                             <form-user
-                                csrf-token="{{ csrf_token() }}"
                                 list-role={{ json_encode($roles) }}
                             ></form-user>
                         @endif
@@ -29,4 +28,5 @@
             </div>
         </div>
     </div>
+    <toast-popup></toast-popup>
 @endsection

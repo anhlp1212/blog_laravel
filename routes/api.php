@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix('admin')->group(function () {
     Route::group(['prefix' => 'users', 'as' => 'user.'], function () {
-        Route::get('/', [UserController::class, 'index'])->name('users');
+        Route::post('/store', [UserController::class, 'store'])->name('add_user');
     });
 });

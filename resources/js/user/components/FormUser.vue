@@ -1,31 +1,25 @@
 <template>
     <form class="form-add-user" id="form-add-user" method="post">
-        <!-- @csrf -->
-
+        <div class="alert alert-warning" v-if="errorsMeg.errorMessage.length"> {{ errorsMeg.errorMessage }} </div>
         <div class="my-form-control">
             <label class="input-label">User Name</label>
             <div class="Style__StyleInput">
-                <input class="input_fullName" type="text" name="name" v-validate="'required|max:128'" maxlength="128"
-                    placeholder="Add User Name" value="" required>
-                <div class="box-error-message">
-                    <small class="small">
-                        <div class="error">
-                            {{ errors.first('name') }}
-                        </div>
-                    </small>
-                </div>
+                <input v-model="name" class="input_fullName" type="text" name="name" maxlength="128"
+                    v-on:input="inputName()" v-validate="'required|max:128'" placeholder="Add User Name" value="" required>
+                <error-input
+                ></error-input>
             </div>
         </div>
 
         <div class="my-form-control">
             <label class="input-label">Email</label>
             <div class="Style__StyleInput">
-                <input class="input_fullName" type="email" name="email" v-validate="'required|email:rfc,dns'"
-                    placeholder="Add Email" value="" required>
+                <input v-model="email" class="input_fullName" type="email" name="email" placeholder="Add Email" value=""
+                    v-validate="'required|email:rfc,dns'" v-on:input="inputEmail()" required>
                 <div class="box-error-message">
                     <small class="small">
                         <div class="error">
-                            {{ errors.first('email') }}
+                            {{ errorsMeg.email.length ? errorsMeg.email : errors.first('email') }}
                         </div>
                     </small>
                 </div>
@@ -34,7 +28,8 @@
 
         <div class="my-form-control">
             <label class="input-label">Choose a Role</label>
-            <select v-if="inforRoles.length" class="form-select form-select-lg" id="roles" name="roles" style="width:30%;">
+            <select v-if="inforRoles.length" v-model="roles" class="form-select form-select-lg" id="roles" name="roles"
+                style="width:30%;">
                 <option v-for="role in inforRoles" v-bind:value="role.id">
                     {{ role.name }}
                 </option>
@@ -44,12 +39,12 @@
         <div class="my-form-control">
             <label class="input-label">Password</label>
             <div class="Style__StyleInput">
-                <input v-validate="'required|min:8'" name="password" type="password" placeholder="Enter Password"
-                    ref="password" required>
+                <input v-validate="'required|min:8'" v-model="password" name="password" type="password"
+                    placeholder="Enter Password" ref="password" v-on:input="inputPassword()" required>
                 <div class="box-error-message">
                     <small class="small">
                         <div class="error">
-                            {{ errors.first('password') }}
+                            {{ errorsMeg.password.length ? errorsMeg.password : errors.first('password') }}
                         </div>
                     </small>
                 </div>
@@ -59,8 +54,9 @@
         <div class="my-form-control">
             <label class="input-label">Confirm Password</label>
             <div class="Style__StyleInput">
-                <input v-validate="'required|confirmed:password'" name="password_confirmation" type="password"
-                    placeholder="Enter Password to Confirm" data-vv-as="password" required>
+                <input v-validate="'required|confirmed:password'" v-model="passwordConfirmation"
+                    name="password_confirmation" type="password" placeholder="Enter Password to Confirm"
+                    data-vv-as="password" required>
                 <div class="box-error-message">
                     <small class="small">
                         <div class="error">
@@ -84,24 +80,89 @@ export default {
     data() {
         return {
             inforRoles: [],
+            name: '',
+            email: '',
+            roles: 1,
+            password: '',
+            passwordConfirmation: '',
+            errorsMeg: {
+                name: '',
+                email: '',
+                password: '',
+                errorMessage: '',
+            },
+            timeDelay: 2000,
         }
     },
-    props: ['csrf-token', 'list-role'],
+    props: ['list-role'],
     mounted() {
         this.inforRoles = JSON.parse(this.listRole);
     },
     methods: {
-        submitForm() {
-            if (this.errors.items.length == 0 && this.checkValidInput()) {
-                console.log('Submit succees');
+        async submitForm() {
+            console.log('Submit Form');
+
+            try {
+                if (this.errors.items.length == 0) {
+                    const response = await this.axios.post(`/api/admin/users/store`, {
+                        'name': this.name,
+                        'email': this.email,
+                        'password': this.password,
+                        'password_confirmation': this.passwordConfirmation,
+                        'roles': this.roles
+                    })
+                        .then((response) => {
+                            this.clearInput();
+
+                            $('#messageAjax').html(response.data.message)
+                            const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-error';
+                            $("#liveToast").addClass(toastClass);
+                            this.showToast();
+                        })
+                }
+            } catch (error) {
+                switch (error.response.status) {
+                    case 422: {
+                        const errorRes = error.response.data;
+                        if (typeof errorRes.errors.name != 'undefined') {
+                            this.errorsMeg.name = errorRes.errors.name[0];
+                        }
+                        if (typeof errorRes.errors.email != 'undefined') {
+                            this.errorsMeg.email = errorRes.errors.email[0];
+                        }
+                        if (typeof errorRes.errors.password != 'undefined') {
+                            this.errorsMeg.password = errorRes.errors.password[0];
+                        }
+                        break;
+                    }
+                    case 500: {
+                        this.errorsMeg.errorMessage = response.data.message;
+                    }
+                }
             }
         },
-        checkValidInput() {
-            if (!this.fields.name.valid || !this.fields.email.valid || !this.fields.password.valid || !this.fields.password_confirmation.valid){
-                return false;
-            } else {
-                return true;
-            }
+        inputName() {
+            this.errorsMeg.name = '';
+        },
+        inputEmail() {
+            this.errorsMeg.email = '';
+        },
+        inputPassword() {
+            this.errorsMeg.password = '';
+        },
+        showToast() {
+            $("#liveToast").toast({
+                animation: false,
+                autohide: true,
+                delay: this.timeDelay
+            }).toast('show');
+        },
+        clearInput() {
+            this.name = '';
+            this.email = '';
+            this.roles = 1;
+            this.password = '';
+            this.passwordConfirmation = '';
         }
     }
 }

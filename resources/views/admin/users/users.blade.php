@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout_admin')
 
-@section('script')
-    <script src="{{ mix('user/js/main.js') }}" defer></script>
+@section('script-vue')
+    <script src="{{ mix('user/js/main.js') }}"></script>
 @endsection
 
 @section('content')
@@ -23,6 +23,7 @@
                                 check-url-show="{{ Route::has('user.detail') }}"
                                 check-url-edit="{{ Route::has('user.edit_user_page') }}"
                                 check-url-delete="{{ Route::has('user.delete_user') }}"
+                                data-users="{{ json_encode($users) }}"
                             ></table-users>
                         </div>
                     </div>

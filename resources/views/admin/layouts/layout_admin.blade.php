@@ -39,8 +39,9 @@
         <div id="app">
             @yield('content')
         </div>
-
     </main>
+    <!-- JS for each Page -->
+    @yield('script-vue')
 </body>
 
 </html>

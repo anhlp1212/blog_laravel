@@ -34,15 +34,14 @@ export default {
         return {
             theads: ['ID', 'Name', 'Email', 'Roles'],
             users: [],
-            errors: [],
             url_show: "/admin/users/",
             url_edit: "/admin/users/edit/",
             user_id: Number,
         }
     },
-    props: ['check-url-show', 'check-url-edit', 'check-url-delete'],
-    created() {
-        this.fetchUsers()
+    props: ['check-url-show', 'check-url-edit', 'check-url-delete', 'data-users'],
+    mounted() {
+        this.users = JSON.parse(this.dataUsers);
     },
     methods: {
         removeUser: function (event) {
@@ -53,14 +52,6 @@ export default {
                 console.error('User cannot delete');
             }
         },
-        async fetchUsers(page=1) {
-            try {
-                let response = await this.axios.get('/api/admin/users?'+page)
-                this.users = response.data;
-            } catch (error) {
-                console.error(error);
-            }
-        }
     }
 }
 </script>

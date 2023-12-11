@@ -16,7 +16,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getAllOrderByDesc()
     {
-        return $this->model->orderByDesc('id')->get();
+        return $this->model
+            ->select('admins.id','admins.name','email','roles.name as role_name')
+            ->join('roles', 'roles.id', '=', 'admins.role_id')
+            ->orderByDesc('id')
+            ->get();
     }
 
     public function getUserRoleAdmin()
@@ -24,14 +28,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $this->model
             ->select('*')
             ->where('role_id', '=', 1)
-            ->get();
-    }
-    
-    public function getUsersForTable(){
-        return $this->model
-            ->select('admins.id','admins.name','email','roles.name as role_name')
-            ->join('roles', 'roles.id', '=', 'admins.role_id')
-            ->orderByDesc('id')
             ->get();
     }
 }

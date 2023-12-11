@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout_admin')
 
-@section('script')
-    <script src="{{ mix('user/js/main.js') }}" defer></script>
+@section('script-vue')
+    <script src="{{ mix('user/js/main.js') }}"></script>
 @endsection
 
 @section('content')
