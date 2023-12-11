@@ -18,4 +18,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return $this->model->orderByDesc('id')->get();
     }
+
+    public function getUserRoleAdmin()
+    {
+        return $this->model
+            ->select('*')
+            ->where('role_id', '=', 1)
+            ->get();
+    }
 }

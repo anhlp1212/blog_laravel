@@ -16,8 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
         /* TinyMCE configuration options */
         skin: false,
         content_css: false,
-        plugins: 'code table lists',
+        plugins: 'code table lists autoresize image preview',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
+        //paste Core plugin options
+        paste_block_drop: false,
+        paste_data_images: true,
+        paste_as_text: true,
     });
 
     $('#image_post').on('change', loadFile)

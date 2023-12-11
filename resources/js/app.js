@@ -5,6 +5,12 @@ import 'tinymce/skins/content/default/content.css';
 import 'tinymce/icons/default/icons';
 import 'tinymce/themes/silver/theme';
 import 'tinymce/models/dom/model';
+import 'tinymce/plugins/code/plugin.js';
+import 'tinymce/plugins/lists/plugin.js';
+import 'tinymce/plugins/table/plugin.js';
+import 'tinymce/plugins/autoresize/plugin.js';
+import 'tinymce/plugins/image/plugin.js';
+import 'tinymce/plugins/preview/plugin.js';
 
 // .. After imports init TinyMCE ..
 window.addEventListener('DOMContentLoaded', () => {

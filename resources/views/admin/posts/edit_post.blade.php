@@ -14,6 +14,9 @@
                             <div class="info-row">
                                 <div class="info-left-addsp">
                                     <div class="Style__AccountInfo">
+                                        @if (session('warning'))
+                                            <div class="alert alert-warning"> {{ session('warning') }} </div>
+                                        @endif
                                         @if (Route::has('post.edit_post'))
                                             <form class="form-edit-sp" id="form-edit-sp" method="post"
                                                 action="{{ route('post.edit_post') }}" enctype="multipart/form-data">

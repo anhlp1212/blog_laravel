@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="space-y-2 pt-6 pb-8 md:space-y-5">
-        <div class="divide-y divide-gray-200 dark:divide-gray-700">
-            @if (isset($posts))
-                @foreach ($posts as $post)
-                    <x-blog.blog-item :post="$post" />
-                @endforeach
-            @else
-                <div>Currently unavailable</div>
-            @endif
+    <div class="container mx-auto px-5 max-w-3xl">
+        @if (isset($posts))
+            @foreach ($posts as $post)
+                <x-blog.blog-item :post="$post" />
+            @endforeach
+        @else
+            <div>Currently unavailable</div>
+        @endif
+
+        <div class="uppercase flex items-center justify-center flex-1 py-5 font-sans">
+            <a href="#" rel="next" class="block no-underline text-light hover:text-black px-5">Check More
+                Articles</a>
         </div>
     </div>
 @endsection
