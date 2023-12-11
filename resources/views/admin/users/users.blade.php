@@ -24,7 +24,8 @@
                                 check-url-show="{{ Route::has('user.detail') }}"
                                 check-url-edit="{{ Route::has('user.edit_user_page') }}"
                                 check-url-delete="{{ Route::has('user.delete_user') }}"
-                                data-users="{{ json_encode($users) }}"></table-users>
+                                data-users="{{ json_encode($users) }}"
+                            ></table-users>
                         </div>
                     </div>
                 </div>
@@ -32,13 +33,5 @@
         </div>
     </div>
 
-    {{-- Popup confirm --}}
-    @include('layouts.confirm')
-
-    {{-- Popup toast  --}}
-    @include('layouts.toast')
-@endsection
-
-@section('script')
-    <script src="{{ mix('/js/user_delete.js') }}"></script>
+    <toast-popup></toast-popup>
 @endsection

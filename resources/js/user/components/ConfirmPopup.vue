@@ -45,7 +45,6 @@ export default {
         deleteUser: function () {
             this.axios.delete(`/admin/users/delete_user/${this.userId}`)
                 .then(response => {
-                    console.log(response);
                     $('#messageAjax').html(response.data.message)
                     const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-error';
                     $("#liveToast").addClass(toastClass);
