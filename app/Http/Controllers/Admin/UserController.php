@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userRepo->getAllOrderByDesc(['admins.id', 'admins.name', 'email', 'role_id']);
+        $users = $this->userRepo->getAllOrderByDesc();
         return view('admin.users.users', ['users' => $users, 'title' => 'Users Management']);
     }
 

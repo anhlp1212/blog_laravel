@@ -22,39 +22,33 @@
                     {{ user.role.name }}
                 </td>
                 <td class="text-center align-middle">
-                    <a v-if="checkUrlShow" class="btn btn-success btn-sm" :href="url_show + user.id">Show</a>
-                    <a v-if="checkUrlEdit" class="btn btn-info btn-sm" :href="url_edit + user.id">Edit</a>
-                    <a v-if="checkUrlDelete" class="btn btn-primary btn-sm delete_btn" v-bind:id="user.id"
+                    <a class="btn btn-success btn-sm" :href="`${urlCurrent}/${user.id}`">Show</a>
+                    <a class="btn btn-info btn-sm" :href="`${urlCurrent}/edit/${user.id}`">Edit</a>
+                    <a class="btn btn-primary btn-sm delete_btn" v-bind:id="user.id"
                         data-toggle="tooltip" @click.prevent="removeUser">Delete</a>
                 </td>
             </tr>
-            <ConfirmPopup 
+            <confirm-popup
                 :user-id="this.user_id"
                 title-confirm = "Do you want to delete this user?"
-            ></ConfirmPopup>
+            ></confirm-popup>
         </tbody>
     </table>
 </template>
 
 <script>
-import ConfirmPopup from './confirmPopup.vue';
-
 export default {
     name: 'TableUsers',
-    components: { ConfirmPopup },
     data() {
         return {
             theads: ['ID', 'Name', 'Email', 'Roles'],
             users: [],
-            url_show: "/admin/users/",
-            url_edit: "/admin/users/edit/",
             user_id: Number,
         }
     },
-    props: ['check-url-show', 'check-url-edit', 'check-url-delete', 'data-users'],
+    props: ['url-current', 'data-users'],
     mounted() {
         this.users = JSON.parse(this.dataUsers);
-        console.log(this.users);
     },
     methods: {
         removeUser: function (event) {

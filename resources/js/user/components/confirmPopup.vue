@@ -4,7 +4,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">{{ this.titleConfirm ? this.titleConfirm : 'Do you want to take this action ? ' }}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ this.titleConfirm ? this.titleConfirm : 'Do you want to take this action?' }}</h4>
                     <button type="button" class="btn-close btn-dark" data-dismiss="modal" aria-label="Close"
                         data-bs-dismiss="modal"></button>
                 </div>
