@@ -14,11 +14,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return Admin::class;
     }
 
-    public function getAllOrderByDesc()
+    public function getAllOrderByDesc($columns = ['*'])
     {
         return $this->model
-            ->select('admins.id', 'admins.name', 'email', 'roles.name as role_name')
-            ->join('roles', 'roles.id', '=', 'admins.role_id')
+            ->select(...$columns)
+            ->with('role')
             ->orderByDesc('id')
             ->get();
     }

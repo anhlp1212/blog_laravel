@@ -6,9 +6,9 @@ import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
 
 // Import Vue components
-import TableUsers from './components/TableUsers.vue';
-import ConfirmPopup from './components/ConfirmPopup.vue';
-import ToastPopup from './components/ToastPopup.vue';
+import TableUsers from './components/tableUsers.vue';
+import ConfirmPopup from './components/confirmPopup.vue';
+import ToastPopup from './components/toastPopup.vue';
 
 Vue.component('table-users', TableUsers);
 Vue.component('confirm-popup', ConfirmPopup);

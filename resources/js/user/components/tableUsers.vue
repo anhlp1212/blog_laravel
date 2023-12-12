@@ -9,23 +9,35 @@
         </thead>
         <tbody class="table-tbody-sp">
             <tr v-for="user in users">
-                <th v-for="item in user" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    {{ item }}
-                </th>
-                <th class="text-center align-middle">
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    {{ user.id }}
+                </td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    {{ user.name }}
+                </td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    {{ user.email }}
+                </td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    {{ user.role.name }}
+                </td>
+                <td class="text-center align-middle">
                     <a v-if="checkUrlShow" class="btn btn-success btn-sm" :href="url_show + user.id">Show</a>
                     <a v-if="checkUrlEdit" class="btn btn-info btn-sm" :href="url_edit + user.id">Edit</a>
                     <a v-if="checkUrlDelete" class="btn btn-primary btn-sm delete_btn" v-bind:id="user.id"
                         data-toggle="tooltip" @click.prevent="removeUser">Delete</a>
-                </th>
+                </td>
             </tr>
-            <ConfirmPopup :user-id="this.user_id"></ConfirmPopup>
+            <ConfirmPopup 
+                :user-id="this.user_id"
+                title-confirm = "Do you want to delete this user?"
+            ></ConfirmPopup>
         </tbody>
     </table>
 </template>
 
 <script>
-import ConfirmPopup from './ConfirmPopup.vue';
+import ConfirmPopup from './confirmPopup.vue';
 
 export default {
     name: 'TableUsers',
@@ -42,6 +54,7 @@ export default {
     props: ['check-url-show', 'check-url-edit', 'check-url-delete', 'data-users'],
     mounted() {
         this.users = JSON.parse(this.dataUsers);
+        console.log(this.users);
     },
     methods: {
         removeUser: function (event) {
