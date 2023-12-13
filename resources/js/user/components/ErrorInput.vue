@@ -2,7 +2,7 @@
     <div class="box-error-message">
         <small class="small">
             <div class="error">
-                <!-- {{ errorsMeg.name.length ? errorsMeg.name : errors.first('name') }} -->
+                {{ this.errorsMeg ? this.errorsMeg : this.errorFirst }}
             </div>
         </small>
     </div>
@@ -10,11 +10,6 @@
 
 <script>
 export default {
-    data() {
-        return {
-
-        }
-    },
-    props: ['']
+    props: ['errors-meg', 'error-first']
 }
 </script>

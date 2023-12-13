@@ -19,12 +19,10 @@
                 <div class="card my-4">
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table-users 
-                                check-url-show="{{ Route::has('user.detail') }}"
+                            <table-users check-url-show="{{ Route::has('user.detail') }}"
                                 check-url-edit="{{ Route::has('user.edit_user_page') }}"
                                 check-url-delete="{{ Route::has('user.delete_user') }}"
-                                data-users="{{ json_encode($users) }}"
-                            ></table-users>
+                                data-users="{{ json_encode($users) }}"></table-users>
                         </div>
                     </div>
                 </div>
@@ -32,9 +30,23 @@
         </div>
     </div>
 
-    <toast-popup></toast-popup>
+    <toast-popup
+        message-toast="Add successfully!"
+        class-toast="text-bg-success"
+    ></toast-popup>
 @endsection
 
 @section('script')
-    <script src="{{ mix('/js/user_delete.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (sessionStorage.getItem("showmsg") == '1') {
+                $("#liveToast").toast({
+                    animation: false,
+                    autohide: true,
+                    delay: 2000
+                }).toast('show');
+                sessionStorage.removeItem("showmsg");
+            }
+        });
+    </script>
 @endsection

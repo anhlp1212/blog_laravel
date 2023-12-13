@@ -6,8 +6,10 @@
             <div class="Style__StyleInput">
                 <input v-model="name" class="input_fullName" type="text" name="name" maxlength="128"
                     v-on:input="inputName()" v-validate="'required|max:128'" placeholder="Add User Name" value="" required>
-                <error-input
-                ></error-input>
+                <ErrorInput
+                    :errors-meg="errorsMeg.name"
+                    :error-first="errors.first('name')"
+                ></ErrorInput>
             </div>
         </div>
 
@@ -16,13 +18,10 @@
             <div class="Style__StyleInput">
                 <input v-model="email" class="input_fullName" type="email" name="email" placeholder="Add Email" value=""
                     v-validate="'required|email:rfc,dns'" v-on:input="inputEmail()" required>
-                <div class="box-error-message">
-                    <small class="small">
-                        <div class="error">
-                            {{ errorsMeg.email.length ? errorsMeg.email : errors.first('email') }}
-                        </div>
-                    </small>
-                </div>
+                <ErrorInput
+                    :errors-meg="errorsMeg.email"
+                    :error-first="errors.first('email')"
+                ></ErrorInput>
             </div>
         </div>
 
@@ -41,13 +40,10 @@
             <div class="Style__StyleInput">
                 <input v-validate="'required|min:8'" v-model="password" name="password" type="password"
                     placeholder="Enter Password" ref="password" v-on:input="inputPassword()" required>
-                <div class="box-error-message">
-                    <small class="small">
-                        <div class="error">
-                            {{ errorsMeg.password.length ? errorsMeg.password : errors.first('password') }}
-                        </div>
-                    </small>
-                </div>
+                <ErrorInput
+                    :errors-meg="errorsMeg.password"
+                    :error-first="errors.first('password')"
+                ></ErrorInput>
             </div>
         </div>
 
@@ -57,13 +53,10 @@
                 <input v-validate="'required|confirmed:password'" v-model="passwordConfirmation"
                     name="password_confirmation" type="password" placeholder="Enter Password to Confirm"
                     data-vv-as="password" required>
-                <div class="box-error-message">
-                    <small class="small">
-                        <div class="error">
-                            {{ errors.first('password_confirmation') }}
-                        </div>
-                    </small>
-                </div>
+                <ErrorInput
+                    :errors-meg="errorsMeg.password"
+                    :error-first="errors.first('password_confirmation')"
+                ></ErrorInput>
             </div>
         </div>
 
@@ -76,6 +69,8 @@
 </template>
 
 <script>
+import ErrorInput from './ErrorInput.vue';
+
 export default {
     data() {
         return {
@@ -91,9 +86,9 @@ export default {
                 password: '',
                 errorMessage: '',
             },
-            timeDelay: 2000,
         }
     },
+    components: { ErrorInput },
     props: ['list-role'],
     mounted() {
         this.inforRoles = JSON.parse(this.listRole);
@@ -104,21 +99,17 @@ export default {
 
             try {
                 if (this.errors.items.length == 0) {
-                    const response = await this.axios.post(`/api/admin/users/store`, {
+                    await this.axios.post(`/admin/users/add`, {
                         'name': this.name,
                         'email': this.email,
                         'password': this.password,
                         'password_confirmation': this.passwordConfirmation,
                         'roles': this.roles
                     })
-                        .then((response) => {
-                            this.clearInput();
-
-                            $('#messageAjax').html(response.data.message)
-                            const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-error';
-                            $("#liveToast").addClass(toastClass);
-                            this.showToast();
-                        })
+                    .then(() => {
+                        sessionStorage.setItem("showmsg", "1");
+                        window.location.href= "/admin/users/";
+                    })
                 }
             } catch (error) {
                 switch (error.response.status) {
@@ -150,20 +141,6 @@ export default {
         inputPassword() {
             this.errorsMeg.password = '';
         },
-        showToast() {
-            $("#liveToast").toast({
-                animation: false,
-                autohide: true,
-                delay: this.timeDelay
-            }).toast('show');
-        },
-        clearInput() {
-            this.name = '';
-            this.email = '';
-            this.roles = 1;
-            this.password = '';
-            this.passwordConfirmation = '';
-        }
     }
 }
 </script>
