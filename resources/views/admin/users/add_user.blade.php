@@ -20,6 +20,7 @@
                         @if (Route::has('user.add_user'))
                             <form-user
                                 list-role={{ json_encode($roles) }}
+                                url-action="/admin/users/add"
                             ></form-user>
                         @endif
                     </div>
@@ -28,5 +29,4 @@
             </div>
         </div>
     </div>
-    <toast-popup></toast-popup>
 @endsection

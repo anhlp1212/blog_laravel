@@ -37,7 +37,7 @@ export default {
         },
         confirmYes: function () {
             if (typeof this.userId === "undefined" || this.userId === null) {
-                console.error("Error deleting post: Not defined post");
+                console.error("Error deleting user: Not defined user");
             } else {
                 this.deleteUser();
             }

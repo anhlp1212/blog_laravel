@@ -5,7 +5,7 @@
             <label class="input-label">User Name</label>
             <div class="Style__StyleInput">
                 <input v-model="name" class="input_fullName" type="text" name="name" maxlength="128"
-                    v-on:input="inputName()" v-validate="'required|max:128'" placeholder="Add User Name" value="" required>
+                    v-on:input="inputEvent(`name`)" v-validate="'required|max:128'" placeholder="Add User Name" value="" required>
                 <ErrorInput
                     :errors-meg="errorsMeg.name"
                     :error-first="errors.first('name')"
@@ -17,7 +17,7 @@
             <label class="input-label">Email</label>
             <div class="Style__StyleInput">
                 <input v-model="email" class="input_fullName" type="email" name="email" placeholder="Add Email" value=""
-                    v-validate="'required|email:rfc,dns'" v-on:input="inputEmail()" required>
+                    v-validate="'required|email:rfc,dns'" v-on:input="inputEvent(`email`)" required>
                 <ErrorInput
                     :errors-meg="errorsMeg.email"
                     :error-first="errors.first('email')"
@@ -27,9 +27,9 @@
 
         <div class="my-form-control">
             <label class="input-label">Choose a Role</label>
-            <select v-if="inforRoles.length" v-model="roles" class="form-select form-select-lg" id="roles" name="roles"
+            <select v-if="infoRoles.length" v-model="roles" class="form-select form-select-lg" id="roles" name="roles"
                 style="width:30%;">
-                <option v-for="role in inforRoles" v-bind:value="role.id">
+                <option v-for="role in infoRoles" v-bind:value="role.id">
                     {{ role.name }}
                 </option>
             </select>
@@ -39,7 +39,7 @@
             <label class="input-label">Password</label>
             <div class="Style__StyleInput">
                 <input v-validate="'required|min:8'" v-model="password" name="password" type="password"
-                    placeholder="Enter Password" ref="password" v-on:input="inputPassword()" required>
+                    placeholder="Enter Password" ref="password" v-on:input="inputEvent(`password`)" required>
                 <ErrorInput
                     :errors-meg="errorsMeg.password"
                     :error-first="errors.first('password')"
@@ -74,7 +74,7 @@ import ErrorInput from './ErrorInput.vue';
 export default {
     data() {
         return {
-            inforRoles: [],
+            infoRoles: [],
             name: '',
             email: '',
             roles: 1,
@@ -86,61 +86,67 @@ export default {
                 password: '',
                 errorMessage: '',
             },
+            user: [],
         }
     },
     components: { ErrorInput },
-    props: ['list-role'],
+    props: ['list-role', 'url-action', 'data-user'],
     mounted() {
-        this.inforRoles = JSON.parse(this.listRole);
+        this.infoRoles = JSON.parse(this.listRole);
+        if (typeof this.dataUser != "undefined" && this.dataUser != null) {
+            this.user = JSON.parse(this.dataUser);
+            this.name = this.user.name;
+            this.email = this.user.email;
+            this.roles = this.user.role_id;
+        }
     },
     methods: {
         async submitForm() {
-            console.log('Submit Form');
-
             try {
                 if (this.errors.items.length == 0) {
-                    await this.axios.post(`/admin/users/add`, {
-                        'name': this.name,
-                        'email': this.email,
-                        'password': this.password,
-                        'password_confirmation': this.passwordConfirmation,
-                        'roles': this.roles
-                    })
-                    .then(() => {
-                        sessionStorage.setItem("showmsg", "1");
-                        window.location.href= "/admin/users/";
-                    })
+                    if (typeof this.urlAction === "undefined" || this.urlAction === null) {
+                        this.errorsMeg.errorMessage = "The request could not be completed. Please try again later.";
+                    } else {
+                        await this.axios.post(this.urlAction, {
+                            'name': this.name,
+                            'email': this.email,
+                            'password': this.password,
+                            'password_confirmation': this.passwordConfirmation,
+                            'roles': this.roles,
+                            'id': this.user.id
+                        })
+                        .then(() => {
+                            sessionStorage.setItem("showmsg", "1");
+                            window.location.href= "/admin/users/";
+                        });
+                    } 
                 }
             } catch (error) {
                 switch (error.response.status) {
                     case 422: {
                         const errorRes = error.response.data;
-                        if (typeof errorRes.errors.name != 'undefined') {
-                            this.errorsMeg.name = errorRes.errors.name[0];
-                        }
-                        if (typeof errorRes.errors.email != 'undefined') {
-                            this.errorsMeg.email = errorRes.errors.email[0];
-                        }
-                        if (typeof errorRes.errors.password != 'undefined') {
-                            this.errorsMeg.password = errorRes.errors.password[0];
-                        }
+                        this.errorsMeg.name = errorRes.errors.name ? errorRes.errors.name[0] : '';
+                        this.errorsMeg.email = errorRes.errors.email ? errorRes.errors.email[0] : '';
+                        this.errorsMeg.password = errorRes.errors.password ? errorRes.errors.password[0] : '';
                         break;
                     }
-                    case 500: {
-                        this.errorsMeg.errorMessage = response.data.message;
-                    }
+                    default:
+                        this.errorsMeg.errorMessage = "The request could not be completed. Please try again later.";
                 }
             }
         },
-        inputName() {
-            this.errorsMeg.name = '';
-        },
-        inputEmail() {
-            this.errorsMeg.email = '';
-        },
-        inputPassword() {
-            this.errorsMeg.password = '';
-        },
+        inputEvent(item){
+            switch (item) {
+                case "name":
+                    this.errorsMeg.name = '';
+                    break;
+                case "email":
+                    this.errorsMeg.email = '';
+                    break;
+                case "password":
+                    this.errorsMeg.password = '';
+            }
+        }
     }
 }
 </script>
