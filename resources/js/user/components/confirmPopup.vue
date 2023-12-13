@@ -36,34 +36,38 @@ export default {
         },
         confirmYes: function () {
             if (typeof this.userId === "undefined" || this.userId === null) {
-                console.error("Error deleting post: Not defined post");
+                console.error("Error deleting user: Not defined user");
             } else {
                 this.axios.delete(`/admin/users/delete_user/${this.userId}`)
                     .then(response => {
-                        $('#messageAjax').html(response.data.message)
-                        const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-error';
-                        $("#liveToast").addClass(toastClass);
-                        this.showToast();
+                        const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-danger';
+                        this.showToast(response.data.message, toastClass);
+
                         if (typeof this.urlUsers === "undefined" || this.urlUsers === null) {
                             document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
                         } else {
-                            setTimeout(() => { window.location.href = this.urlUsers; }, this.timeDelay)
+                            setTimeout(() => { window.location.href = this.urlUsers; }, this.timeDelay);
                         }
                     })
                     .catch(error => {
                         console.error(error);
-                        $('#messageAjax').html(`Error deleting user: ${error.message}`);
-                        this.showToast();
+                        this.showToast(`Error deleting user.`, 'text-bg-danger');
                     });
                 $("#mi-modal").modal('hide');
             }
         },
-        showToast: function () {
+        showToast: function (content, toastClass) {
+            $('#messageAjax').html(content)
+            $("#liveToast").addClass(toastClass);
             $("#liveToast").toast({
                 animation: false,
                 autohide: true,
                 delay: this.timeDelay
             }).toast('show');
+            // Remove class after hide toast
+            $("#liveToast").on("hidden.bs.toast", function () {
+                $(this).removeClass(toastClass);
+            });
         }
     }
 }

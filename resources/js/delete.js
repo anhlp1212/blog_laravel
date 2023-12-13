@@ -16,12 +16,12 @@ window.callAjaxDelete = function (url_delete) {
                     $('#messageAjax').html(response.message)
                     const listClass = document.getElementById("liveToast").classList;
                     if (response.status == "success") {
-                        listClass.remove("text-bg-error");
+                        listClass.remove("text-bg-danger");
                         listClass.add("text-bg-success");
                         document.getElementById(`${item_id}`).parentElement.parentElement.remove();
                     } else {
                         listClass.remove("text-bg-success");
-                        listClass.add("text-bg-error");
+                        listClass.add("text-bg-danger");
                     }
                     $("#liveToast").toast({
                         animation: false,
