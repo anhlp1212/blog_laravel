@@ -6,13 +6,13 @@ import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
 
 // Import Vue components
-import TableUsers from './components/tableUsers.vue';
-import ConfirmPopup from './components/confirmPopup.vue';
-import ToastPopup from './components/toastPopup.vue';
+import tableUsers from './components/tableUsers.vue';
+import confirmPopup from './components/confirmPopup.vue';
+import toastPopup from './components/toastPopup.vue';
 
-Vue.component('table-users', TableUsers);
-Vue.component('confirm-popup', ConfirmPopup);
-Vue.component('toast-popup', ToastPopup);
+Vue.component('table-users', tableUsers);
+Vue.component('confirm-popup', confirmPopup);
+Vue.component('toast-popup', toastPopup);
 
 new Vue({
     el: '#app',

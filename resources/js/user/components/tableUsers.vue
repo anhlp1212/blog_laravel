@@ -29,7 +29,7 @@
                 </td>
             </tr>
             <confirm-popup
-                :user-id="this.user_id"
+                :user-id="this.userId"
                 title-confirm = "Do you want to delete this user?"
             ></confirm-popup>
         </tbody>
@@ -43,7 +43,7 @@ export default {
         return {
             theads: ['ID', 'Name', 'Email', 'Roles'],
             users: [],
-            user_id: Number,
+            userId: Number,
         }
     },
     props: ['url-current', 'data-users'],
@@ -53,7 +53,7 @@ export default {
     methods: {
         removeUser: function (event) {
             if (event) {
-                this.user_id = event.target.id;
+                this.userId = event.target.id;
                 $("#mi-modal").modal('show');
             } else {
                 console.error('User cannot delete');
