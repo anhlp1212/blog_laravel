@@ -4,16 +4,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">{{ this.titleConfirm ? this.titleConfirm : 'Do you want to take this action?' }}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ titleConfirm ? titleConfirm : 'Do you want to take this action?' }}</h4>
                     <button type="button" class="btn-close btn-dark" data-dismiss="modal" aria-label="Close"
                         data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" id="modal-btn-yes" @click.prevent="confirmYes()">
-                        {{ this.btnYes ? this.btnYes : 'Yes' }}
+                        {{ btnYes ? btnYes : 'Yes' }}
                     </button>
                     <button type="button" class="btn btn-primary" id="modal-btn-no" @click.prevent="confirmNo()">
-                        {{ this.btnNo ? this.btnYes : 'No' }}
+                        {{ btnNo ? btnYes : 'No' }}
                     </button>
                 </div>
             </div>
@@ -24,11 +24,6 @@
 <script>
 export default {
     name: "ConfirmPopup",
-    data() {
-        return {
-            timeDelay: 2000,
-        }
-    },
     props: ['user-id', 'url-users', 'title-confirm', 'btn-yes', 'btn-no'],
     methods: {
         confirmNo: function () {
@@ -41,33 +36,22 @@ export default {
                 this.axios.delete(`/admin/users/delete_user/${this.userId}`)
                     .then(response => {
                         const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-danger';
-                        this.showToast(response.data.message, toastClass);
 
                         if (typeof this.urlUsers === "undefined" || this.urlUsers === null) {
                             document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
+                            showToast(response.data.message, toastClass);
                         } else {
-                            setTimeout(() => { window.location.href = this.urlUsers; }, this.timeDelay);
+                            const showToastObject = { status: '1', content: response.data.message, classToast: toastClass };
+                            sessionStorage.setItem('showmsg', JSON.stringify(showToastObject));
+                            window.location.href = this.urlUsers;
                         }
                     })
                     .catch(error => {
                         console.error(error);
-                        this.showToast(`Error deleting user.`, 'text-bg-danger');
+                        showToast(`Error deleting user.`, 'text-bg-danger');
                     });
                 $("#mi-modal").modal('hide');
             }
-        },
-        showToast: function (content, toastClass) {
-            $('#messageAjax').html(content)
-            $("#liveToast").addClass(toastClass);
-            $("#liveToast").toast({
-                animation: false,
-                autohide: true,
-                delay: this.timeDelay
-            }).toast('show');
-            // Remove class after hide toast
-            $("#liveToast").on("hidden.bs.toast", function () {
-                $(this).removeClass(toastClass);
-            });
         }
     }
 }
