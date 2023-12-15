@@ -116,7 +116,8 @@ export default {
                             'id': this.user.id
                         })
                         .then(() => {
-                            const showToastObject = { status: '1', content: `Add user: ${this.name} successfully!`, classToast: 'text-bg-success' };
+                            let contentToast = this.dataUser ? 'Edit user: ' : 'Add user: ';
+                            const showToastObject = { status: '1', content: `${contentToast} ${this.name} successfully!`, classToast: 'text-bg-success' };
                             sessionStorage.setItem('showmsg', JSON.stringify(showToastObject));
                             window.location.href= "/admin/users/";
                         });
