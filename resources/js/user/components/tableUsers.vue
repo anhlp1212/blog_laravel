@@ -8,7 +8,7 @@
             </tr>
         </thead>
         <tbody class="table-tbody-sp">
-            <tr v-for="user in users">
+            <tr v-for="user in users" :key="user.id">
                 <td class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                     {{ user.id }}
                 </td>
@@ -20,7 +20,7 @@
                 </td>
                 <td class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                     <div class="d-flex align-items-center gap-2">
-                        <div class="min-width-sm-200px" :id="`role-${user.id}`">{{ user.role.name }}</div>
+                        <div style="min-width: 60px;" :id="`role-${user.id}`">{{ user.role.name }}</div>
                         <button type="button" class="p-1 m-0 btn btn-sm btn-dark" @click.prevent="() => changeRole($event, user)">Change</button>
                     </div>
                 </td>
@@ -31,17 +31,16 @@
                         @click.prevent="removeUser">Delete</a>
                 </td>
             </tr>
-            <selectRole
-                v-if="userChoice != null"
-                :info-roles = infoRoles
-                :user = userChoice
-                @role-changed="showDataChanged"
-            ></selectRole>
-            <confirm-popup 
-                :user-id = this.userId 
+            <confirm-popup
+                :user-id = this.userId
                 title-confirm = "Do you want to delete this user?"
             ></confirm-popup>
-
+            <selectRole
+                v-if = this.userChoice
+                :info-roles = infoRoles
+                :user = this.userChoice
+                @role-changed="showDataChanged"
+            ></selectRole>
         </tbody>
     </table>
 </template>
@@ -57,15 +56,15 @@ export default {
             theads: ['ID', 'Name', 'Email', 'Roles'],
             users: [],
             infoRoles: [],
-            roles: 1,
             userId: Number,
-            userChoice: ref(null)
+            userChoice: ref(null),
         }
     },
     props: ['url-current', 'data-users', 'data-roles'],
     mounted() {
         this.users = JSON.parse(this.dataUsers);
         this.infoRoles = JSON.parse(this.dataRoles);
+        this.userChoice = this.users[0];
     },
     methods: {
         removeUser: function (event) {
@@ -73,7 +72,7 @@ export default {
                 this.userId = event.target.id;
                 $("#mi-modal").modal('show');
             } else {
-                console.error('User cannot delete');
+                showToast(`Error deleting user: ${error.message}`, 'text-bg-danger');
             }
         },
         changeRole: function(event, user){
@@ -81,35 +80,27 @@ export default {
             if (event) {
                 $("#mi-modal-change-role").modal('show');
             } else {
-                console.error('User cannot change role');
+                showToast(`Error change role: ${error.message}`, 'text-bg-danger');
             }
         },
-        showDataChanged(roleId){
-            if (roleId !== this.userChoice.role_id){
-                this.axios.post(`/admin/users/change_role`, {
+        async showDataChanged(data){
+            if (data.roleId !== this.userChoice.role_id){
+                try {
+                    await this.axios.post(`/admin/users/change_role`, {
                     'id':this.userChoice.id,
-                    'role_id': roleId
-                })
-                .then(response => {
-                    $('#messageAjax').html(response.data.message);
-                    const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-error';
-                    $("#liveToast").addClass(toastClass);
-                    $("#liveToast").toast({
-                        animation: false,
-                        autohide: true,
-                        delay: 2000
-                    }).toast('show');
-                })
-                .catch(error => {
+                    'role_id': data.roleId
+                    })
+                    .then(response => {
+                        const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-danger';
+                        showToast(response.data.message, toastClass);
+                        const changedRole = this.infoRoles.find(role => role.id === data.roleId);
+                        document.getElementById(`role-${this.userChoice.id}`).innerHTML = changedRole.name;
+                        this.userChoice.role_id = changedRole.id;
+                    });
+                } catch (error) {
                     console.error(error);
-                    $('#messageAjax').html(`Error deleting user: ${error.message}`);
-                    $("#liveToast").toast({
-                        animation: false,
-                        autohide: true,
-                        delay: 2000
-                    }).toast('show');
-                });
-                document.getElementById(`role-${this.userChoice.id}`).innerHTML = roleId; ///
+                    showToast(`Error change role: ${error.message}`, 'text-bg-danger');
+                }
             }
         }
     }

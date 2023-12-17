@@ -123,25 +123,25 @@ class UserController extends Controller
 
     public function changeRole(Request $request)
     {
-        // try {
-        $data = $request->all();
-        $user = $this->userRepo->update(
-            $data['id'],
-            ['role_id' => $data['role_id'],]
-        );
-        if ($user) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Updated successfully!'
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 'false',
-                'message' => 'Error'
-            ], 200);
+        try {
+            $data = $request->all();
+            $user = $this->userRepo->update(
+                $data['id'],
+                ['role_id' => $data['role_id'],]
+            );
+            if ($user) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Changed successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'false',
+                    'message' => 'Error'
+                ], 200);
+            }
+        } catch (Exception $e) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
         }
-        // } catch (Exception $e) {
-        //     return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
-        // }
     }
 }
