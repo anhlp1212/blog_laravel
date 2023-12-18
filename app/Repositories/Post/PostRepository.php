@@ -13,13 +13,8 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return Post::class;
     }
 
-    public function getAllOrderByDesc()
+    public function getAllOrderByDesc(string $itemOrderBy, int $paginate)
     {
-        return $this->model->orderByDesc('id')->paginate(10);
-    }
-
-    public function getAllPagination()
-    {
-        return $this->model->paginate(10);
+        return $this->model->orderByDesc($itemOrderBy)->paginate($paginate);
     }
 }
