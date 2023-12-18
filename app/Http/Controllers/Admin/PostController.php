@@ -29,7 +29,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = $this->postRepo->getAll();
+        $posts = $this->postRepo->getAllPagination();
         return view('index', ['posts' => $posts]);
     }
 

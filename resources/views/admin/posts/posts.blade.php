@@ -44,6 +44,9 @@
                 </div>
             </div>
         </div>
+        <div class="text-uppercase flex-1 py-5 font-sans">
+            {!! $posts->links() !!}
+        </div>
     </div>
 
     {{-- Popup confirm --}}

@@ -8,4 +8,6 @@ interface PostRepositoryInterface extends RepositoryInterface
 {
     //
     public function getAllOrderByDesc();
+
+    public function getAllPagination();
 }
