@@ -41,7 +41,7 @@ export default {
                 this.axios.delete(`/admin/users/delete_user/${this.userId}`)
                     .then(response => {
                         const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-danger';
-                        this.showToast(response.data.message, toastClass);
+                        showToast(response.data.message, toastClass);
 
                         if (typeof this.urlUsers === "undefined" || this.urlUsers === null) {
                             document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
@@ -51,24 +51,11 @@ export default {
                     })
                     .catch(error => {
                         console.error(error);
-                        this.showToast(`Error deleting user.`, 'text-bg-danger');
+                        showToast(`Error deleting user.`, 'text-bg-danger');
                     });
                 $("#mi-modal").modal('hide');
             }
         },
-        showToast: function (content, toastClass) {
-            $('#messageAjax').html(content)
-            $("#liveToast").addClass(toastClass);
-            $("#liveToast").toast({
-                animation: false,
-                autohide: true,
-                delay: this.timeDelay
-            }).toast('show');
-            // Remove class after hide toast
-            $("#liveToast").on("hidden.bs.toast", function () {
-                $(this).removeClass(toastClass);
-            });
-        }
     }
 }
 </script>
