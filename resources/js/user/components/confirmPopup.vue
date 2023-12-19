@@ -6,14 +6,14 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">{{ this.titleConfirm ? this.titleConfirm : 'Do you want to take this action?' }}</h4>
                     <button type="button" class="btn-close btn-dark" data-dismiss="modal" aria-label="Close"
-                        data-bs-dismiss="modal"></button>
+                        data-bs-dismiss="modal" @click.prevent="confirmNo"></button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" id="modal-btn-yes" @click.prevent="confirmYes()">
-                        {{ this.btnYes ? this.btnYes : 'Yes' }}
-                    </button>
-                    <button type="button" class="btn btn-primary" id="modal-btn-no" @click.prevent="confirmNo()">
+                    <button type="button" class="btn btn-light" id="modal-btn-no" @click.prevent="confirmNo()">
                         {{ this.btnNo ? this.btnYes : 'No' }}
+                    </button>
+                    <button type="button" class="btn btn-primary" id="modal-btn-yes" @click.prevent="confirmYes()">
+                        {{ this.btnYes ? this.btnYes : 'Yes' }}
                     </button>
                 </div>
             </div>
@@ -42,7 +42,6 @@ export default {
                     .then(response => {
                         const toastClass = response.data.status === 'success' ? 'text-bg-success' : 'text-bg-danger';
                         showToast(response.data.message, toastClass);
-
                         if (typeof this.urlUsers === "undefined" || this.urlUsers === null) {
                             document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
                         } else {
