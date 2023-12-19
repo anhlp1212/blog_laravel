@@ -24,9 +24,12 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userRepo->getAllOrderByDesc();
         $roles = $this->roleRepo->getAll();
         if (!$roles) {
+            abort(404);
+        }
+        $users = $this->userRepo->getAllOrderByDesc();
+        if (!$users) {
             abort(404);
         }
         return view('admin.users.users', ['users' => $users, 'roles' => $roles, 'title' => 'Users Management']);

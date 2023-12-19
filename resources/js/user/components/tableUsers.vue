@@ -84,7 +84,7 @@ export default {
             }
         },
         async showDataChanged(data){
-            if (data.roleId !== this.userChoice.role_id){
+            if (data.roleId !== this.userChoice.role_id) {
                 try {
                     await this.axios.post(`/admin/users/change_role`, {
                     'id':this.userChoice.id,
