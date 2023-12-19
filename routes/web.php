@@ -54,6 +54,8 @@ Route::prefix('admin')->group(function () {
             Route::delete('/delete_user/{user_id}', [UserController::class, 'deleteUser'])->name('delete_user');
 
             Route::get('/{user_id}', [UserController::class, 'detail'])->name('detail');
+
+            Route::post('/change_role', [UserController::class, 'changeRole'])->name('change_role');
         });
     });
 });
