@@ -75,3 +75,5 @@ During my internship at ZIGExN VeNtura Co., I was able to apply the knowledge I 
 #### 2.10. Posts Management - Delete Post:
 ![image](https://github.com/anhlp1212/blog_laravel/assets/147794362/a97d5fb4-b953-49e3-bb57-df5172fa0e1e)
 
+#### 2.11. Send mail for all Admin when update post by batch
+![image](https://github.com/anhlp1212/blog_laravel/assets/147794362/922e4ecd-56ac-4205-b28d-c7f2c7b7fad0)
