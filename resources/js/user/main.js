@@ -20,6 +20,7 @@ Vue.component('toast-popup', toastPopup);
 Vue.component('info-user', infoUser);
 Vue.component('form-user', formUser);
 
+// Import JS
 import sessionShowToast from "/js/show_toast.js";
 import showToast from "/js/show_toast.js";
 
