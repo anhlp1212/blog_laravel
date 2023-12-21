@@ -8,6 +8,7 @@ use App\Repositories\Role\RoleRepository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -23,8 +24,15 @@ class UserController extends Controller
 
     public function index()
     {
+        $roles = $this->roleRepo->getAll();
+        if (!$roles) {
+            abort(404);
+        }
         $users = $this->userRepo->getAllOrderByDesc();
-        return view('admin.users.users', ['users' => $users, 'title' => 'Users Management']);
+        if (!$users) {
+            abort(404);
+        }
+        return view('admin.users.users', ['users' => $users, 'roles' => $roles, 'title' => 'Users Management']);
     }
 
     public function detail($user_id)
@@ -104,6 +112,30 @@ class UserController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Deleted successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'false',
+                    'message' => 'Error'
+                ], 200);
+            }
+        } catch (Exception $e) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
+        }
+    }
+
+    public function changeRole(Request $request)
+    {
+        try {
+            $data = $request->all();
+            $user = $this->userRepo->update(
+                $data['id'],
+                ['role_id' => $data['role_id'],]
+            );
+            if ($user) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Changed successfully!'
                 ], 200);
             } else {
                 return response()->json([
