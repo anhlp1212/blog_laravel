@@ -21,12 +21,7 @@ Vue.component('info-user', infoUser);
 Vue.component('form-user', formUser);
 
 // Import JS
-// import sessionShowToast from "/js/show_toast.js";
 import showToast from "./show_toast.js";
-
-document.addEventListener("DOMContentLoaded", function() {
-    window.sessionShowToast();
-});
 
 new Vue({
     el: '#app',

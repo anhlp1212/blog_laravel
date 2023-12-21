@@ -116,11 +116,9 @@ export default {
                             'id': this.user.id
                         })
                         .then(() => {
-                            const showToastObject = { status: '1', content: `Add user: ${this.name} successfully!`, classToast: 'text-bg-success' };
-                            sessionStorage.setItem('showmsg', JSON.stringify(showToastObject));
                             window.location.href= "/admin/users/";
                         });
-                    } 
+                    }
                 }
             } catch (error) {
                 switch (error.response.status) {
