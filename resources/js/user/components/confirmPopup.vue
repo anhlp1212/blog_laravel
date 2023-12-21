@@ -36,7 +36,7 @@ export default {
         },
         confirmYes: function () {
             if (typeof this.userId === "undefined" || this.userId === null) {
-                console.error("Error deleting post: Not defined post");
+                console.error("Error deleting user: Not defined user");
             } else {
                 this.axios.delete(`/admin/users/delete_user/${this.userId}`)
                     .then(response => {
@@ -45,12 +45,12 @@ export default {
                         if (typeof this.urlUsers === "undefined" || this.urlUsers === null) {
                             document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
                         } else {
-                            setTimeout(() => { window.location.href = this.urlUsers; }, this.timeDelay)
+                            setTimeout(() => { window.location.href = this.urlUsers; }, this.timeDelay);
                         }
                     })
                     .catch(error => {
                         console.error(error);
-                        showToast(`Error deleting user: ${error.message}`, 'text-bg-danger');
+                        showToast(`Error deleting user.`, 'text-bg-danger');
                     });
                 $("#mi-modal").modal('hide');
             }
