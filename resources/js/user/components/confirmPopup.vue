@@ -41,8 +41,6 @@ export default {
                             document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
                             showToast(response.data.message, toastClass);
                         } else {
-                            const showToastObject = { status: '1', content: response.data.message, classToast: toastClass };
-                            sessionStorage.setItem('showmsg', JSON.stringify(showToastObject));
                             window.location.href = this.urlUsers;
                         }
                     })

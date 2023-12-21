@@ -14,12 +14,6 @@ import toastPopup from './components/toastPopup.vue';
 import infoUser from './components/infoUser.vue';
 import formUser from './components/formUser.vue';
 
-// Import JS
-import showToast from "/js/show_toast.js";
-
-// Import JS
-import showToast from "/js/show_toast.js";
-
 Vue.component('table-users', tableUsers);
 Vue.component('confirm-popup', confirmPopup);
 Vue.component('toast-popup', toastPopup);
@@ -27,8 +21,8 @@ Vue.component('info-user', infoUser);
 Vue.component('form-user', formUser);
 
 // Import JS
-import sessionShowToast from "/js/show_toast.js";
-import showToast from "/js/show_toast.js";
+// import sessionShowToast from "/js/show_toast.js";
+import showToast from "./show_toast.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     window.sessionShowToast();

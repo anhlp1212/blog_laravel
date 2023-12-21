@@ -109,6 +109,10 @@ class UserController extends Controller
         try {
             $user = $this->userRepo->delete($user_id);
             if ($user) {
+                session()->flash('toast', [
+                    'type' => 'text-bg-success',
+                    'message' => 'Deleted successfully!',
+                ]);
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Deleted successfully!'
