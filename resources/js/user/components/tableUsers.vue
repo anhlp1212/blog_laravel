@@ -38,7 +38,8 @@
 
         <!-- Phân trang -->
         <div class="flex-1 mt-3 me-5 flex justify-right font-sans">
-            <paginate 
+            <paginate
+                v-if="pageCount !== 1"
                 :page-count="pageCount"
                 :click-handler="selectPage"
                 :prev-text="'Previous'"
