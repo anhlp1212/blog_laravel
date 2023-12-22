@@ -134,7 +134,7 @@ export default {
                 }
             }
         },
-        inputEvent(item){
+        inputEvent(item) {
             switch (item) {
                 case "name":
                     this.errorsMeg.name = '';
