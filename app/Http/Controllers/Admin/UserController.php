@@ -100,11 +100,16 @@ class UserController extends Controller
             if ($data['password']) {
                 $dataUpdate['password'] = Hash::make($data['password']);
             }
-            $this->userRepo->update(
+            $user = $this->userRepo->update(
                 $data['id'],
                 $dataUpdate
             );
-            return redirect()->route('user.users');
+            if ($user) {
+                session()->flash('toast', [
+                    'type' => 'text-bg-success',
+                    'message' => 'Edited successfully!',
+                ]);
+            }
         } catch (Exception $e) {
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
