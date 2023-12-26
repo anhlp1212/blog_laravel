@@ -2,6 +2,11 @@
 
 @section('script-vue')
     <script src="{{ mix('user/js/main.js') }}"></script>
+    @if (session()->has('toast'))
+        <script type="application/javascript">
+            showToast('{{ session('toast.message') }}', '{{ session('toast.type') }}')
+        </script>
+    @endif
 @endsection
 
 @section('content')

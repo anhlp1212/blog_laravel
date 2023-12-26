@@ -42,11 +42,9 @@ mix
 // Admin - Manage User
 mix
     .setPublicPath('public')
-    .js("resources/js/user/user_delete.js", "public/js")
     .js("resources/js/user/show_toast.js", "public/js")
     .styles('resources/css/user/style.css', 'public/css/user/style.css')
     .version();
-
 
 // Vue JS
 mix

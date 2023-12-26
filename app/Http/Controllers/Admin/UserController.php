@@ -57,13 +57,19 @@ class UserController extends Controller
     {
         try {
             $data = $request->all();
-            $this->userRepo->create([
+            $user = $this->userRepo->create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'role_id' => $data['roles']
             ]);
-            return redirect()->route('user.users');
+
+            if ($user) {
+                session()->flash('toast', [
+                    'type' => 'text-bg-success',
+                    'message' => 'Added successfully!',
+                ]);
+            }
         } catch (Exception $e) {
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
@@ -109,6 +115,10 @@ class UserController extends Controller
         try {
             $user = $this->userRepo->delete($user_id);
             if ($user) {
+                session()->flash('toast', [
+                    'type' => 'text-bg-success',
+                    'message' => 'Deleted successfully!',
+                ]);
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Deleted successfully!'
