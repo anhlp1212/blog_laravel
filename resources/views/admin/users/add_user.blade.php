@@ -18,10 +18,10 @@
                             <div class="alert alert-warning"> {{ session('warning') }} </div>
                         @endif
                         @if (Route::has('user.add_user'))
-                        <form-user
-                            list-role={{ json_encode($roles) }}
-                            url-action="/admin/users/add"
-                        ></form-user>
+                            <form-user
+                                list-role={{ json_encode($roles) }}
+                                url-action="/admin/users/add"
+                            ></form-user>
                         @endif
                     </div>
                 </div>
