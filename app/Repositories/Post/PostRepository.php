@@ -17,4 +17,12 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         return $this->model->orderByDesc($itemOrderBy)->paginate($paginate);
     }
+
+    public function search(string $keyword, int $paginate)
+    {
+        $posts = Post::search($keyword)->paginate($paginate);
+        // Add custom parameters to pagination queries
+        $posts->appends(['search' => $keyword]);
+        return $posts;
+    }
 }

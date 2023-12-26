@@ -1,16 +1,16 @@
 @if (isset($posts))
     @foreach ($posts as $post)
         <tr>
-            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
+            <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7">
                 {{ $post->id }}
             </th>
-            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
+            <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7">
                 {{ $post->admin->name }}
             </th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                 {{ $post->title }}
             </th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+            <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                 {{ $post->image }}
             </th>
             <td class="text-center align-middle">

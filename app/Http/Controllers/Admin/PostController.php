@@ -13,6 +13,7 @@ use App\Models\Post;
 use Mail;
 use App\Mail\SendDemoMail;
 use App\Repositories\SendMail\SendMailRepository;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -43,9 +44,14 @@ class PostController extends Controller
         }
     }
 
-    public function showPosts()
+    public function showPosts(Request $request)
     {
-        $posts = $this->postRepo->getAllOrderByDesc('id', 10);
+        // Search with Laravel Scout
+        if ($request->filled('search')) {
+            $posts = $this->postRepo->search($request->search, 10);
+        } else {
+            $posts = $this->postRepo->getAllOrderByDesc('id', 10);
+        }
         return view('admin.posts.posts', ['posts' => $posts, 'title' => 'Posts Management']);
     }
 
