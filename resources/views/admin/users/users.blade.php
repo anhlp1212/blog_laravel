@@ -2,6 +2,11 @@
 
 @section('script-vue')
     <script src="{{ mix('user/js/main.js') }}"></script>
+    @if (session()->has('toast'))
+        <script type="application/javascript">
+            showToast('{{ session('toast.message') }}', '{{ session('toast.type') }}')
+        </script>
+    @endif
 @endsection
 
 @section('content')
@@ -17,11 +22,12 @@
                     </div>
                 @endif
                 <div class="card my-4">
-                    <div class="card-body px-0 pb-2">
+                    <div class="card-body px-2 pb-2">
                         <div class="table-responsive p-0">
                             <table-users
                                 url-current="{{ url()->current() }}"
                                 data-users="{{ json_encode($users) }}"
+                                data-roles="{{ json_encode($roles) }}"
                             ></table-users>
                         </div>
                     </div>

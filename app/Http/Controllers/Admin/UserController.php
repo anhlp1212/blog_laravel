@@ -8,6 +8,7 @@ use App\Repositories\Role\RoleRepository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -23,8 +24,15 @@ class UserController extends Controller
 
     public function index()
     {
+        $roles = $this->roleRepo->getAll();
+        if (!$roles) {
+            abort(404);
+        }
         $users = $this->userRepo->getAllOrderByDesc('id');
-        return view('admin.users.users', ['users' => $users, 'title' => 'Users Management']);
+        if (!$users) {
+            abort(404);
+        }
+        return view('admin.users.users', ['users' => $users, 'roles' => $roles, 'title' => 'Users Management']);
     }
 
     public function detail($user_id)
@@ -49,13 +57,19 @@ class UserController extends Controller
     {
         try {
             $data = $request->all();
-            $this->userRepo->create([
+            $user = $this->userRepo->create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'role_id' => $data['roles']
             ]);
-            return redirect()->route('user.users');
+
+            if ($user) {
+                session()->flash('toast', [
+                    'type' => 'text-bg-success',
+                    'message' => 'Added successfully!',
+                ]);
+            }
         } catch (Exception $e) {
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
@@ -86,11 +100,16 @@ class UserController extends Controller
             if ($data['password']) {
                 $dataUpdate['password'] = Hash::make($data['password']);
             }
-            $this->userRepo->update(
+            $user = $this->userRepo->update(
                 $data['id'],
                 $dataUpdate
             );
-            return redirect()->route('user.users');
+            if ($user) {
+                session()->flash('toast', [
+                    'type' => 'text-bg-success',
+                    'message' => 'Edited successfully!',
+                ]);
+            }
         } catch (Exception $e) {
             return redirect()->back()->with('warning', 'Unable to process request. Error: ' . $e->getMessage());
         }
@@ -101,9 +120,37 @@ class UserController extends Controller
         try {
             $user = $this->userRepo->delete($user_id);
             if ($user) {
+                session()->flash('toast', [
+                    'type' => 'text-bg-success',
+                    'message' => 'Deleted successfully!',
+                ]);
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Deleted successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'false',
+                    'message' => 'Error'
+                ], 200);
+            }
+        } catch (Exception $e) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
+        }
+    }
+
+    public function changeRole(Request $request)
+    {
+        try {
+            $data = $request->all();
+            $user = $this->userRepo->update(
+                $data['id'],
+                ['role_id' => $data['role_id'],]
+            );
+            if ($user) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Changed successfully!'
                 ], 200);
             } else {
                 return response()->json([
