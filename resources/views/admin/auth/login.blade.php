@@ -41,28 +41,31 @@
                                     <form class="text-start" action="{{ route('admin.login') }}" method="post">
                                         @csrf
 
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email"
-                                                value="{{ old('email') }}">
+                                        <label class="form-label mt-3 mb-1 text-dark">Email</label>
+                                        <div class="input-group input-group-outline mb-1">
+                                            <input type="email" class="form-control" placeholder="name@example.com"
+                                                id="email" name="email" value="{{ old('email') }}">
                                         </div>
                                         @error('email')
-                                            <div class="error">{{ $message ?? 'Error' }}</div>
+                                            <div class="text-danger">{{ $message ?? 'Error' }}</div>
                                         @enderror
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+
+                                        <label class="form-label mt-3 mb-1 text-dark">Password</label>
+                                        <div class="input-group input-group-outline mb-1">
+                                            <input type="password" class="form-control" placeholder="Enter the password"
+                                                id="password" name="password">
                                         </div>
                                         @error('password')
-                                            <div class="error">{{ $message ?? 'Error' }}</div>
+                                            <div class="text-danger">{{ $message ?? 'Error' }}</div>
                                         @enderror
-                                        <div class="form-check form-switch d-flex align-items-center mb-3">
+
+                                        <div class="form-check form-switch d-flex align-items-center my-3">
                                             <input class="form-check-input" type="checkbox" id="rememberMe" checked>
                                             <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember
                                                 me</label>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign
+                                            <button type="submit" class="btn bg-gradient-primary w-100 my-3 mb-2">Sign
                                                 in</button>
                                         </div>
                                         <p class="mt-4 text-sm text-center">
