@@ -29,7 +29,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = $this->postRepo->getAll();
+        $posts = $this->postRepo->getAllOrderByDesc('id', 10);
         return view('index', ['posts' => $posts]);
     }
 
@@ -45,7 +45,7 @@ class PostController extends Controller
 
     public function showPosts()
     {
-        $posts = $this->postRepo->getAllOrderByDesc();
+        $posts = $this->postRepo->getAllOrderByDesc('id', 10);
         return view('admin.posts.posts', ['posts' => $posts, 'title' => 'Posts Management']);
     }
 

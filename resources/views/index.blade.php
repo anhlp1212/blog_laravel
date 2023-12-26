@@ -10,9 +10,8 @@
             <div>Currently unavailable</div>
         @endif
 
-        <div class="uppercase flex items-center justify-center flex-1 py-5 font-sans">
-            <a href="#" rel="next" class="block no-underline text-light hover:text-black px-5">Check More
-                Articles</a>
+        <div class="uppercase flex-1 py-5 font-sans">
+            {!! $posts->links() !!}
         </div>
     </div>
 @endsection

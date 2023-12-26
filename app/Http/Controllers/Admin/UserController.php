@@ -28,7 +28,7 @@ class UserController extends Controller
         if (!$roles) {
             abort(404);
         }
-        $users = $this->userRepo->getAllOrderByDesc();
+        $users = $this->userRepo->getAllOrderByDesc('id');
         if (!$users) {
             abort(404);
         }

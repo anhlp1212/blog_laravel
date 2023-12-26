@@ -1,4 +1,5 @@
 <template>
+  <div>
     <table class="table align-items-center mb-0">
         <thead>
             <tr>
@@ -43,14 +44,29 @@
             ></selectRole>
         </tbody>
     </table>
+    <!-- Phân trang -->
+    <div class="flex-1 mt-3 me-5 flex justify-right font-sans">
+        <paginate
+            v-if="pageCount !== 1"
+            :page-count="pageCount"
+            :click-handler="selectPage"
+            :prev-text="'Previous'"
+            :next-text="'Next'"
+            :container-class="'pagination'"
+            :page-class="'page-item'"
+            :page-link-class="'page-link'"
+        ></paginate>
+    </div>
+    </div>
 </template>
 
 <script>
 import { ref } from 'vue';
 import selectRole from './selectRole.vue';
+import paginate from 'vuejs-paginate';
 export default {
     name: 'TableUsers',
-    components: { selectRole },
+    components: { selectRole, paginate },
     data() {
         return {
             theads: ['ID', 'Name', 'Email', 'Roles'],
@@ -58,6 +74,8 @@ export default {
             infoRoles: [],
             userId: Number,
             userChoice: ref(null),
+            currentPage: 1,     // Trang hiện tại
+            perPage: 10,      // Số lượng mục trên mỗi trang
         }
     },
     props: ['url-current', 'data-users', 'data-roles'],
@@ -65,6 +83,16 @@ export default {
         this.users = JSON.parse(this.dataUsers);
         this.infoRoles = JSON.parse(this.dataRoles);
         this.userChoice = this.users[0];
+    },
+    computed: {
+        paginatedUsers() {
+            const start = (this.currentPage - 1) * this.perPage;
+            const end = start + this.perPage;
+            return this.users.slice(start, end);
+        },
+        pageCount() {
+            return Math.ceil(this.users.length / this.perPage);
+        },
     },
     methods: {
         removeUser: function (event) {
@@ -74,6 +102,9 @@ export default {
             } else {
                 showToast(`Error deleting user: ${error.message}`, 'text-bg-danger');
             }
+        },
+        selectPage(page) {
+            this.currentPage = page;
         },
         changeRole: function(event, user){
             this.userChoice = user;
