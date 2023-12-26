@@ -6,7 +6,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">{{ titleConfirm ? titleConfirm : 'Do you want to take this action?' }}</h4>
                     <button type="button" class="btn-close btn-dark" data-dismiss="modal" aria-label="Close"
-                        data-bs-dismiss="modal"></button>
+                        data-bs-dismiss="modal" @click.prevent="confirmNo"></button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" id="modal-btn-yes" @click.prevent="confirmYes()">
@@ -41,8 +41,6 @@ export default {
                             document.getElementById(`${this.userId}`).parentElement.parentElement.remove();
                             showToast(response.data.message, toastClass);
                         } else {
-                            const showToastObject = { status: '1', content: response.data.message, classToast: toastClass };
-                            sessionStorage.setItem('showmsg', JSON.stringify(showToastObject));
                             window.location.href = this.urlUsers;
                         }
                     })

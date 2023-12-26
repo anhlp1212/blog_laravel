@@ -20,12 +20,8 @@ Vue.component('toast-popup', toastPopup);
 Vue.component('info-user', infoUser);
 Vue.component('form-user', formUser);
 
-import sessionShowToast from "/js/show_toast.js";
-import showToast from "/js/show_toast.js";
-
-document.addEventListener("DOMContentLoaded", function() {
-    window.sessionShowToast();
-});
+// Import JS
+import showToast from "./show_toast.js";
 
 new Vue({
     el: '#app',
